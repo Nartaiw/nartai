@@ -1,0 +1,2182 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nartai</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Барлық CSS стильдері осында */
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #0dcaf0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            border-radius: 15px 15px 0 0 !important;
+            padding: 1rem 1.5rem;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.8rem 0;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin: 0 2px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .post-card {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .post-card:hover {
+            border-left-color: var(--success-color);
+        }
+
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .btn {
+            border-radius: 8px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #0b5ed7);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0b5ed7, #0a58ca);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+
+        footer {
+            margin-top: auto;
+        }
+
+        footer .social-links a {
+            transition: transform 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            
+            .card {
+                border-radius: 10px;
+            }
+            
+            .btn {
+                padding: 0.4rem 1rem;
+            }
+        }
+
+        .is-invalid {
+            border-color: var(--danger-color);
+        }
+
+        .invalid-feedback {
+            color: var(--danger-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-users"></i> Nartai NetWork
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">
+                            <i class="fas fa-home"></i> Басты бет
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#posts">
+                            <i class="fas fa-newspaper"></i> Посттар
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#create-post">
+                            <i class="fas fa-edit"></i> Жаңа пост
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#dashboard">
+                            <i class="fas fa-tachometer-alt"></i> Бақылау тақтасы
+                        </a>
+                    </li>
+                </ul>
+                
+                <form class="d-flex me-2" id="searchForm">
+                    <input class="form-control me-2" type="search" id="searchInput" placeholder="Іздеу..." aria-label="Іздеу">
+                    <button class="btn btn-outline-light" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown" id="userMenu" style="display: none;">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            <img src="https://ui-avatars.com/api/?name=Пайдаланушы&background=0D8ABC&color=fff" 
+                                 alt="Avatar" class="rounded-circle" width="30" height="30">
+                            <span id="usernameDisplay">Пайдаланушы</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#profile">
+                                <i class="fas fa-user"></i> Менің профилім
+                            </a></li>
+                            <li><a class="dropdown-item" href="#edit-profile">
+                                <i class="fas fa-cog"></i> Профильді өңдеу
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> Шығу
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" id="loginMenu">
+                        <a class="nav-link" href="#login">
+                            <i class="fas fa-sign-in-alt"></i> Кіру
+                        </a>
+                    </li>
+                    <li class="nav-item" id="registerMenu">
+                        <a class="nav-link" href="#register">
+                            <i class="fas fa-user-plus"></i> Тіркелу
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Хабарламалар -->
+    <div class="container mt-3" id="messageContainer"></div>
+
+    <!-- Негізгі мазмұн -->
+    <main class="container my-4">
+        <!-- Басты бет -->
+        <div id="home" class="page-content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0"><i class="fas fa-fire"></i> Соңғы посттар</h4>
+                        </div>
+                        <div class="card-body" id="postsList">
+                            <!-- Посттар осында көрсетіледі -->
+                            <div class="text-center py-5">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Жүктелуде...</span>
+                                </div>
+                                <p class="mt-3">Посттар жүктелуде...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <!-- Жаңа тіркелгендер -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-user-friends"></i> Жаңа пайдаланушылар</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Администратор&background=198754&color=fff" 
+                                             alt="User" class="rounded-circle me-2" width="40" height="40">
+                                        <div>
+                                            <h6 class="mb-0">Администратор</h6>
+                                            <small class="text-muted">Сайт әкімшісі</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://ui-avatars.com/api/?name=User1&background=0D8ABC&color=fff" 
+                                             alt="User" class="rounded-circle me-2" width="40" height="40">
+                                        <div>
+                                            <h6 class="mb-0">user1</h6>
+                                            <small class="text-muted">Бірінші пайдаланушы</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Статистика -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><i class="fas fa-chart-bar"></i> Статистика</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row text-center">
+                                <div class="col-6">
+                                    <h3 id="usersCount">100+</h3>
+                                    <small class="text-muted">Пайдаланушы</small>
+                                </div>
+                                <div class="col-6">
+                                    <h3 id="postsCount">500+</h3>
+                                    <small class="text-muted">Посттар</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Шабыт сөздер -->
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0"><i class="fas fa-quote-left"></i> Шабыт сөздер</h5>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>"Білім - бұл ең қуатты қару."</p>
+                                <footer class="blockquote-footer">Абай Құнанбаев</footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Тіркелу беті -->
+        <div id="register" class="page-content" style="display: none;">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0"><i class="fas fa-user-plus"></i> Жаңа пайдаланушыны тіркеу</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="registerForm">
+                                <div class="mb-3">
+                                    <label for="regUsername" class="form-label">
+                                        <i class="fas fa-user"></i> Пайдаланушы аты *
+                                    </label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="regUsername" 
+                                           name="username" 
+                                           required
+                                           minlength="3">
+                                    <div class="invalid-feedback" id="usernameError"></div>
+                                    <small class="form-text text-muted">Кемінде 3 таңба болуы керек</small>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="regEmail" class="form-label">
+                                        <i class="fas fa-envelope"></i> Электрондық пошта *
+                                    </label>
+                                    <input type="email" 
+                                           class="form-control" 
+                                           id="regEmail" 
+                                           name="email" 
+                                           required>
+                                    <div class="invalid-feedback" id="emailError"></div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="regFullName" class="form-label">
+                                        <i class="fas fa-id-card"></i> Толық аты
+                                    </label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="regFullName" 
+                                           name="full_name">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="regPassword" class="form-label">
+                                        <i class="fas fa-lock"></i> Құпиясөз *
+                                    </label>
+                                    <input type="password" 
+                                           class="form-control" 
+                                           id="regPassword" 
+                                           name="password" 
+                                           required
+                                           minlength="6">
+                                    <div class="invalid-feedback" id="passwordError"></div>
+                                    <small class="form-text text-muted">Кемінде 6 таңба болуы керек</small>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="regConfirmPassword" class="form-label">
+                                        <i class="fas fa-lock"></i> Құпиясөзді қайталаңыз *
+                                    </label>
+                                    <input type="password" 
+                                           class="form-control" 
+                                           id="regConfirmPassword" 
+                                           name="confirmPassword" 
+                                           required>
+                                    <div class="invalid-feedback" id="confirmPasswordError"></div>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                                    <label class="form-check-label" for="terms">
+                                        Мен <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">пайдалану шарттарымен</a> келісемін
+                                    </label>
+                                </div>
+                                
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-user-plus"></i> Тіркелу
+                                    </button>
+                                    <a href="#login" class="btn btn-outline-secondary page-link">
+                                        <i class="fas fa-sign-in-alt"></i> Кіру бетіне өту
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer text-center">
+                            <small class="text-muted">* Міндетті өрістер</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кіру беті -->
+        <div id="login" class="page-content" style="display: none;">
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h4 class="mb-0"><i class="fas fa-sign-in-alt"></i> Жүйеге кіру</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="loginForm">
+                                <div class="mb-3">
+                                    <label for="loginEmail" class="form-label">
+                                        <i class="fas fa-envelope"></i> Электрондық пошта
+                                    </label>
+                                    <input type="email" class="form-control" id="loginEmail" name="email" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="loginPassword" class="form-label">
+                                        <i class="fas fa-lock"></i> Құпиясөз
+                                    </label>
+                                    <input type="password" class="form-control" id="loginPassword" name="password" required>
+                                    <div class="text-end mt-1">
+                                        <a href="#" class="small text-decoration-none">Құпиясөзді ұмыттым?</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                                    <label class="form-check-label" for="remember">Мені есте сақтау</label>
+                                </div>
+                                
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-sign-in-alt"></i> Кіру
+                                    </button>
+                                    <a href="#register" class="btn btn-outline-primary page-link">
+                                        <i class="fas fa-user-plus"></i> Тіркелу
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer text-center">
+                            <small class="text-muted">Сынақ үшін: admin@example.com / 123456</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Бақылау тақтасы -->
+        <div id="dashboard" class="page-content" style="display: none;">
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- Профиль карточкасы -->
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img id="dashboardAvatar" 
+                                 src="https://ui-avatars.com/api/?name=Пайдаланушы&background=0D8ABC&color=fff" 
+                                 alt="Пайдаланушы" 
+                                 class="rounded-circle mb-3" 
+                                 width="120" 
+                                 height="120">
+                            <h4 id="dashboardName">Пайдаланушы</h4>
+                            <p class="text-muted" id="dashboardUsername">@username</p>
+                            <p id="dashboardEmail">email@example.com</p>
+                            <a href="#profile" class="btn btn-outline-primary btn-sm page-link">
+                                <i class="fas fa-eye"></i> Профильді көру
+                            </a>
+                            <a href="#edit-profile" class="btn btn-outline-secondary btn-sm page-link">
+                                <i class="fas fa-edit"></i> Өңдеу
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Статистика -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="mb-0"><i class="fas fa-chart-pie"></i> Статистика</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item d-flex justify-content-between">
+                                    <span>Посттар:</span>
+                                    <span class="badge bg-primary rounded-pill" id="userPostsCount">0</span>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between">
+                                    <span>Лайктар:</span>
+                                    <span class="badge bg-success rounded-pill" id="userLikesCount">0</span>
+                                </div>
+                                <div class="list-group-item d-flex justify-content-between">
+                                    <span>Пікірлер:</span>
+                                    <span class="badge bg-info rounded-pill" id="userCommentsCount">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-9">
+                    <!-- Жылдам әрекеттер -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-bolt"></i> Жылдам әрекеттер</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 mb-2">
+                                    <a href="#create-post" class="btn btn-success w-100 page-link">
+                                        <i class="fas fa-plus"></i> Пост жасау
+                                    </a>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <a href="#edit-profile" class="btn btn-info w-100 page-link">
+                                        <i class="fas fa-user-edit"></i> Профильді өңдеу
+                                    </a>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <a href="#posts" class="btn btn-warning w-100 page-link">
+                                        <i class="fas fa-newspaper"></i> Барлық посттар
+                                    </a>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <a href="#search" class="btn btn-secondary w-100 page-link">
+                                        <i class="fas fa-search"></i> Іздеу
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Менің посттарым -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="fas fa-file-alt"></i> Менің соңғы посттарым</h5>
+                        </div>
+                        <div class="card-body" id="userPostsList">
+                            <div class="text-center py-4">
+                                <i class="fas fa-newspaper fa-3x text-muted mb-3"></i>
+                                <h5>Сізде әлі посттар жоқ</h5>
+                                <p class="text-muted mb-4">Бірінші пост жариялау үшін төмендегі батырманы басыңыз</p>
+                                <a href="#create-post" class="btn btn-primary page-link">
+                                    <i class="fas fa-plus"></i> Бірінші постты жасау
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Соңғы белсенділік -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0"><i class="fas fa-history"></i> Соңғы белсенділік</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center py-4">
+                                <i class="fas fa-history fa-3x text-muted mb-3"></i>
+                                <h5>Әлі белсенділік жоқ</h5>
+                                <p class="text-muted">Пост жариялау немесе пікір қалдыру арқылы бастаңыз</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Жаңа пост жасау -->
+        <div id="create-post" class="page-content" style="display: none;">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0"><i class="fas fa-edit"></i> Жаңа пост жасау</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="createPostForm">
+                                <div class="mb-3">
+                                    <label for="postTitle" class="form-label">
+                                        <i class="fas fa-heading"></i> Пост тақырыбы
+                                    </label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="postTitle" 
+                                           name="title" 
+                                           placeholder="Постыңыздың тақырыбын енгізіңіз...">
+                                    <div class="invalid-feedback" id="titleError"></div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="postCategory" class="form-label">
+                                        <i class="fas fa-tags"></i> Санат
+                                    </label>
+                                    <select class="form-select" id="postCategory" name="category">
+                                        <option value="">Санатты таңдаңыз</option>
+                                        <option value="technology">Технология</option>
+                                        <option value="education">Білім</option>
+                                        <option value="sports">Спорт</option>
+                                        <option value="entertainment">Ойын-сауық</option>
+                                        <option value="news">Жаңалықтар</option>
+                                        <option value="other">Басқа</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="postContent" class="form-label">
+                                        <i class="fas fa-align-left"></i> Мазмұн *
+                                    </label>
+                                    <textarea class="form-control" 
+                                              id="postContent" 
+                                              name="content" 
+                                              rows="8"
+                                              required
+                                              placeholder="Постыңыздың мазмұнын енгізіңіз..."></textarea>
+                                    <div class="invalid-feedback" id="contentError"></div>
+                                    <div class="mt-1 text-end">
+                                        <small id="charCount">0 таңба</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="postImage" class="form-label">
+                                        <i class="fas fa-image"></i> Сурет қосу (міндетті емес)
+                                    </label>
+                                    <input type="file" class="form-control" id="postImage" name="image" accept="image/*">
+                                    <small class="form-text text-muted">Максимум 5MB, формат: JPG, PNG, GIF</small>
+                                    
+                                    <div class="mt-2">
+                                        <img id="imagePreview" src="#" alt="Сурет алдын ала қарау" class="img-fluid rounded" style="display: none; max-height: 200px;">
+                                    </div>
+                                </div>
+                                
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <a href="#dashboard" class="btn btn-secondary me-md-2 page-link">
+                                        <i class="fas fa-times"></i> Болдырмау
+                                    </a>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane"></i> Жариялау
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Кеңес карточкасы -->
+                    <div class="card mt-4">
+                        <div class="card-header bg-info text-white">
+                            <h6 class="mb-0"><i class="fas fa-lightbulb"></i> Пост жазу бойынша кеңестер</h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="mb-0">
+                                <li>Нақты және түсінікті тақырып қойыңыз</li>
+                                <li>Мәтінді бөліктерге бөліп, оқуды жеңілдетіңіз</li>
+                                <li>Суреттер қосу пікірлерді көбейтеді</li>
+                                <li>Өзіңіздің тәжірибелеріңізбен бөлісіңіз</li>
+                                <li>Баска адамдарға сұрақ қойыңыз</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Барлық посттар -->
+        <div id="posts" class="page-content" style="display: none;">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="mb-0"><i class="fas fa-newspaper"></i> Барлық посттар</h4>
+                                <span class="badge bg-light text-primary" id="totalPostsCount">
+                                    0 пост
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body" id="allPostsList">
+                            <!-- Барлық посттар осында көрсетіледі -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <!-- Танымал посттар -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-fire"></i> Танымал посттар</h5>
+                        </div>
+                        <div class="card-body" id="popularPostsList">
+                            <!-- Танымал посттар -->
+                        </div>
+                    </div>
+                    
+                    <!-- Санаттар -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0"><i class="fas fa-tags"></i> Санаттар</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-primary p-2">Технология</span>
+                                <span class="badge bg-success p-2">Білім</span>
+                                <span class="badge bg-warning p-2">Спорт</span>
+                                <span class="badge bg-danger p-2">Ойын-сауық</span>
+                                <span class="badge bg-secondary p-2">Жаңалықтар</span>
+                                <span class="badge bg-dark p-2">Басқа</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Әрекет кнопкалары -->
+                    <div class="card">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0"><i class="fas fa-bullhorn"></i> Әрекеттер</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2" id="postsActions">
+                                <!-- Кнопкалар осында көрсетіледі -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Профиль -->
+        <div id="profile" class="page-content" style="display: none;">
+            <div class="row">
+                <div class="col-md-4">
+                    <!-- Профиль карточкасы -->
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <img id="profileAvatar" 
+                                 src="https://ui-avatars.com/api/?name=Пайдаланушы&background=0D8ABC&color=fff" 
+                                 alt="Пайдаланушы" 
+                                 class="rounded-circle mb-3" 
+                                 width="150" 
+                                 height="150"
+                                 style="object-fit: cover;">
+                            
+                            <h3 id="profileName">Пайдаланушы</h3>
+                            <p class="text-muted" id="profileUsername">@username</p>
+                            <p id="profileBio">Өзі туралы ақпарат</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-6">
+                                    <h5 id="profilePostsCount">0</h5>
+                                    <small class="text-muted">Посттар</small>
+                                </div>
+                                <div class="col-6">
+                                    <h5 id="profileCommentsCount">0</h5>
+                                    <small class="text-muted">Пікірлер</small>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4" id="profileActions">
+                                <!-- Профиль әрекеттері -->
+                            </div>
+                        </div>
+                        <div class="card-footer text-center">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar-alt"></i> Тіркелген: 
+                                <span id="profileJoinedDate">Бүгін</span>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-8">
+                    <!-- Профильді өңдеу кнопкасы -->
+                    <div class="card mb-4" id="profileEditCard" style="display: none;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">Сіздің белсенділігіңіз</h5>
+                                <a href="#create-post" class="btn btn-sm btn-primary page-link">
+                                    <i class="fas fa-plus"></i> Жаңа пост
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Посттар -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-newspaper"></i> Посттар
+                                <span class="badge bg-primary rounded-pill" id="profilePostsBadge">0</span>
+                            </h5>
+                        </div>
+                        <div class="card-body" id="profilePostsList">
+                            <!-- Профиль посттары -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Профильді өңдеу -->
+        <div id="edit-profile" class="page-content" style="display: none;">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0"><i class="fas fa-user-edit"></i> Профильді өңдеу</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="editProfileForm">
+                                <div class="row">
+                                    <div class="col-md-4 text-center mb-4">
+                                        <div class="mb-3">
+                                            <img id="editAvatarPreview" 
+                                                 src="https://ui-avatars.com/api/?name=Пайдаланушы&background=0D8ABC&color=fff" 
+                                                 alt="Аватар" 
+                                                 class="rounded-circle img-thumbnail" 
+                                                 width="200" 
+                                                 height="200"
+                                                 style="object-fit: cover;">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="editAvatar" class="btn btn-outline-primary">
+                                                <i class="fas fa-camera"></i> Суретті өзгерту
+                                            </label>
+                                            <input type="file" 
+                                                   class="form-control d-none" 
+                                                   id="editAvatar" 
+                                                   name="avatar" 
+                                                   accept="image/*">
+                                        </div>
+                                        
+                                        <small class="text-muted">Жақсы көрінетін суретті жүктеңіз</small>
+                                    </div>
+                                    
+                                    <div class="col-md-8">
+                                        <div class="mb-3">
+                                            <label for="editUsername" class="form-label">
+                                                <i class="fas fa-user"></i> Пайдаланушы аты
+                                            </label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   id="editUsername" 
+                                                   disabled>
+                                            <small class="form-text text-muted">Пайдаланушы атын өзгерту мүмкін емес</small>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="editEmail" class="form-label">
+                                                <i class="fas fa-envelope"></i> Электрондық пошта
+                                            </label>
+                                            <input type="email" 
+                                                   class="form-control" 
+                                                   id="editEmail" 
+                                                   disabled>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="editFullName" class="form-label">
+                                                <i class="fas fa-id-card"></i> Толық аты
+                                            </label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   id="editFullName" 
+                                                   name="full_name" 
+                                                   placeholder="Толық атыңызды енгізіңіз...">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="editBio" class="form-label">
+                                                <i class="fas fa-info-circle"></i> Өзі туралы
+                                            </label>
+                                            <textarea class="form-control" 
+                                                      id="editBio" 
+                                                      name="bio" 
+                                                      rows="4"
+                                                      placeholder="Өзіңіз туралы қысқаша ақпарат..."></textarea>
+                                            <small class="form-text text-muted">Өзіңіз туралы қысқаша сипаттама жазыңыз</small>
+                                        </div>
+                                        
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                            <a href="#profile" class="btn btn-secondary me-md-2 page-link">
+                                                <i class="fas fa-times"></i> Болдырмау
+                                            </a>
+                                            <button type="submit" class="btn btn-primary">
+                                                <i class="fas fa-save"></i> Өзгерістерді сақтау
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Қауіпсіздік бөлімі -->
+                    <div class="card mt-4">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0"><i class="fas fa-shield-alt"></i> Қауіпсіздік</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <a href="#" class="btn btn-outline-warning text-start" id="changePasswordBtn">
+                                    <i class="fas fa-key"></i> Құпиясөзді өзгерту
+                                </a>
+                                <a href="#" class="btn btn-outline-danger text-start" id="deleteAccountBtn">
+                                    <i class="fas fa-trash"></i> Аккаунтты жою
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Іздеу -->
+        <div id="search" class="page-content" style="display: none;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">
+                                <i class="fas fa-search"></i> Іздеу нәтижелері
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-4">
+                                <form id="searchPageForm" class="input-group">
+                                    <input type="text" class="form-control" id="searchPageInput" placeholder="Іздеу сөзін енгізіңіз..." required>
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fas fa-search"></i> Іздеу
+                                    </button>
+                                </form>
+                            </div>
+                            
+                            <div id="searchResults">
+                                <div class="text-center py-5">
+                                    <i class="fas fa-search fa-4x text-muted mb-3"></i>
+                                    <h4>Іздеу сөзін енгізіңіз</h4>
+                                    <p class="text-muted">Посттар мен пайдаланушыларды іздеу үшін жоғарыдағы форманы пайдаланыңыз</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Nartai</h5>
+                    <p>Сәлем сайтты жасаган Нуртаев Нартай бүл сайтын толық версия емес жақын арада толық түрі жасалынады</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Байланыс</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i> nurtaqnartai@gamil.com</li>
+                        <li><i class="fas fa-phone me-2"></i> +7 (747) 566-46-05</li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Әлеуметтік желілер</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-telegram fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <div class="text-center">
+                <p>&copy; 2026 Nartai. Барлық құқықтар қорғалған.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Terms Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Пайдалану шарттары</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>1. Өзіңіздің пікірлеріңізге жауапкершілік таңыңыз.</p>
+                    <p>2. Баска адамдардың құққықтарын құрметтеңіз.</p>
+                    <p>3. Теріс мазмұнды жарияламаңыз.</p>
+                    <p>4. Өзіңіздің акпаратыңыздың қауіпсіздігін қамтамасыз етіңіз.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Жабу</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Негізгі JavaScript -->
+    <script>
+        // ЖЕКЕ БАЗАСЫ - localStorage пайдаланамыз
+        class SocialPlatform {
+            constructor() {
+                this.users = JSON.parse(localStorage.getItem('social_users')) || this.getDefaultUsers();
+                this.posts = JSON.parse(localStorage.getItem('social_posts')) || this.getDefaultPosts();
+                this.currentUser = JSON.parse(localStorage.getItem('social_current_user')) || null;
+                
+                this.init();
+            }
+            
+            getDefaultUsers() {
+                return [
+                    {
+                        id: 1,
+                        username: 'admin',
+                        email: 'admin@example.com',
+                        password: '123456',
+                        full_name: 'Администратор',
+                        bio: 'Бұл сайттың әкімшісі',
+                        avatar_url: 'https://ui-avatars.com/api/?name=Администратор&background=198754&color=fff',
+                        joined_date: '2024-01-01',
+                        posts_count: 5,
+                        comments_count: 20
+                    },
+                    {
+                        id: 2,
+                        username: 'user1',
+                        email: 'user1@example.com',
+                        password: '123456',
+                        full_name: 'Бірінші пайдаланушы',
+                        bio: 'Мен бірінші пайдаланушымын',
+                        avatar_url: 'https://ui-avatars.com/api/?name=User1&background=0D8ABC&color=fff',
+                        joined_date: '2024-02-01',
+                        posts_count: 3,
+                        comments_count: 10
+                    },
+                    {
+                        id: 3,
+                        username: 'user2',
+                        email: 'user2@example.com',
+                        password: '123456',
+                        full_name: 'Екінші пайдаланушы',
+                        bio: 'Мен екінші пайдаланушымын',
+                        avatar_url: 'https://ui-avatars.com/api/?name=User2&background=DC3545&color=fff',
+                        joined_date: '2024-03-01',
+                        posts_count: 2,
+                        comments_count: 5
+                    }
+                ];
+            }
+            
+            getDefaultPosts() {
+                return [
+                    {
+                        id: 1,
+                        user_id: 1,
+                        username: 'admin',
+                        title: 'Қош келдіңіз!',
+                        content: 'Бұл сайтқа қош келдіңіздер! Біздің жаңа әлеуметтік платформаға қош келдіңіз. Мұнда сіз өз пікірлеріңізді бөлісе аласыз, басқа адамдармен сөйлесе аласыз және жаңа достар таба аласыз.',
+                        category: 'news',
+                        image_url: '',
+                        likes: 25,
+                        comments: 10,
+                        created_at: '2024-01-15 10:30:00',
+                        avatar_url: 'https://ui-avatars.com/api/?name=Администратор&background=198754&color=fff'
+                    },
+                    {
+                        id: 2,
+                        user_id: 2,
+                        username: 'user1',
+                        title: 'Бірінші пост',
+                        content: 'Бұл менің бірінші постым. Өте қуаныштымын, бұл платформаға қосылғаныма. Бүгін тамаша күн!',
+                        category: 'other',
+                        image_url: '',
+                        likes: 15,
+                        comments: 5,
+                        created_at: '2024-02-10 14:20:00',
+                        avatar_url: 'https://ui-avatars.com/api/?name=User1&background=0D8ABC&color=fff'
+                    },
+                    {
+                        id: 3,
+                        user_id: 3,
+                        username: 'user2',
+                        title: 'Жаңа технологиялар',
+                        content: 'Жаңа смартфон шықты ма? Сондай-ақ AI технологиялары қаншалықты жылдам дамып келе жатқанын көрдіңіз бе? Пікірлеріңізді бөлісіңіз.',
+                        category: 'technology',
+                        image_url: '',
+                        likes: 30,
+                        comments: 12,
+                        created_at: '2024-03-05 09:15:00',
+                        avatar_url: 'https://ui-avatars.com/api/?name=User2&background=DC3545&color=fff'
+                    },
+                    {
+                        id: 4,
+                        user_id: 1,
+                        username: 'admin',
+                        title: 'Білім туралы',
+                        content: 'Білім - бұл өмір бойы жалғасатын процес. Әр күні жаңа нәрсе үйренуге тырысыңыз. Оқу - бұл ең жақсы инвестиция.',
+                        category: 'education',
+                        image_url: '',
+                        likes: 45,
+                        comments: 18,
+                        created_at: '2024-01-20 16:45:00',
+                        avatar_url: 'https://ui-avatars.com/api/?name=Администратор&background=198754&color=fff'
+                    },
+                    {
+                        id: 5,
+                        user_id: 2,
+                        username: 'user1',
+                        title: 'Спорттық жаңалықтар',
+                        content: 'Бүгін футбол ойыны болды. Өте қызықты ойын болды! Сіздер спортты қалай көресіз? Қандай спорт түрлерін ұнатасыз?',
+                        category: 'sports',
+                        image_url: '',
+                        likes: 22,
+                        comments: 8,
+                        created_at: '2024-02-15 20:10:00',
+                        avatar_url: 'https://ui-avatars.com/api/?name=User1&background=0D8ABC&color=fff'
+                    }
+                ];
+            }
+            
+            init() {
+                this.saveData();
+                this.updateUI();
+                this.loadPosts();
+            }
+            
+            saveData() {
+                localStorage.setItem('social_users', JSON.stringify(this.users));
+                localStorage.setItem('social_posts', JSON.stringify(this.posts));
+                if (this.currentUser) {
+                    localStorage.setItem('social_current_user', JSON.stringify(this.currentUser));
+                }
+            }
+            
+            updateUI() {
+                if (this.currentUser) {
+                    document.getElementById('userMenu').style.display = 'block';
+                    document.getElementById('loginMenu').style.display = 'none';
+                    document.getElementById('registerMenu').style.display = 'none';
+                    document.getElementById('usernameDisplay').textContent = this.currentUser.username;
+                    
+                    // Бақылау тақтасын жаңарту
+                    this.updateDashboard();
+                    // Профильді жаңарту
+                    this.updateProfile();
+                } else {
+                    document.getElementById('userMenu').style.display = 'none';
+                    document.getElementById('loginMenu').style.display = 'block';
+                    document.getElementById('registerMenu').style.display = 'block';
+                }
+            }
+            
+            updateDashboard() {
+                if (!this.currentUser) return;
+                
+                const user = this.users.find(u => u.id === this.currentUser.id);
+                if (user) {
+                    document.getElementById('dashboardAvatar').src = user.avatar_url;
+                    document.getElementById('dashboardName').textContent = user.full_name || user.username;
+                    document.getElementById('dashboardUsername').textContent = '@' + user.username;
+                    document.getElementById('dashboardEmail').textContent = user.email;
+                    document.getElementById('userPostsCount').textContent = user.posts_count || 0;
+                    document.getElementById('userLikesCount').textContent = '0';
+                    document.getElementById('userCommentsCount').textContent = user.comments_count || 0;
+                    
+                    // Пайдаланушы посттарын көрсету
+                    this.displayUserPosts();
+                }
+            }
+            
+            updateProfile() {
+                if (!this.currentUser) return;
+                
+                const user = this.users.find(u => u.id === this.currentUser.id);
+                if (user) {
+                    document.getElementById('profileAvatar').src = user.avatar_url;
+                    document.getElementById('profileName').textContent = user.full_name || user.username;
+                    document.getElementById('profileUsername').textContent = '@' + user.username;
+                    document.getElementById('profileBio').textContent = user.bio || 'Өзі туралы ақпарат жоқ';
+                    document.getElementById('profilePostsCount').textContent = user.posts_count || 0;
+                    document.getElementById('profileCommentsCount').textContent = user.comments_count || 0;
+                    document.getElementById('profileJoinedDate').textContent = user.joined_date || 'Бүгін';
+                    document.getElementById('profilePostsBadge').textContent = user.posts_count || 0;
+                    
+                    // Профиль әрекеттері
+                    const profileActions = document.getElementById('profileActions');
+                    profileActions.innerHTML = `
+                        <a href="#edit-profile" class="btn btn-primary page-link">
+                            <i class="fas fa-edit"></i> Профильді өңдеу
+                        </a>
+                        <a href="#dashboard" class="btn btn-outline-secondary page-link">
+                            <i class="fas fa-tachometer-alt"></i> Бақылау тақтасы
+                        </a>
+                    `;
+                    
+                    document.getElementById('profileEditCard').style.display = 'block';
+                    
+                    // Профиль посттарын көрсету
+                    this.displayProfilePosts();
+                }
+            }
+            
+            // Тіркелу функциясы
+            register(username, email, password, full_name) {
+                // Пайдаланушы бар-жоғын тексеру
+                const existingUser = this.users.find(u => u.username === username || u.email === email);
+                if (existingUser) {
+                    return { success: false, message: 'Пайдаланушы аты немесе электрондық пошта бұрыннан бар' };
+                }
+                
+                // Жаңа пайдаланушыны қосу
+                const newUser = {
+                    id: this.users.length + 1,
+                    username,
+                    email,
+                    password,
+                    full_name,
+                    bio: '',
+                    avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=0D8ABC&color=fff`,
+                    joined_date: new Date().toISOString().split('T')[0],
+                    posts_count: 0,
+                    comments_count: 0
+                };
+                
+                this.users.push(newUser);
+                this.saveData();
+                
+                return { success: true, message: 'Тіркелу сәтті аяқталды!' };
+            }
+            
+            // Кіру функциясы
+            login(email, password) {
+                const user = this.users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    this.currentUser = { id: user.id, username: user.username, email: user.email };
+                    this.saveData();
+                    this.updateUI();
+                    return { success: true, message: 'Кіру сәтті!' };
+                } else {
+                    return { success: false, message: 'Қате электрондық пошта немесе құпиясөз' };
+                }
+            }
+            
+            // Шығу функциясы
+            logout() {
+                this.currentUser = null;
+                localStorage.removeItem('social_current_user');
+                this.updateUI();
+                this.showMessage('Сіз жүйеден шықтыңыз', 'success');
+                this.showPage('home');
+            }
+            
+            // Пост қосу функциясы
+            addPost(title, content, category, image_url = '') {
+                if (!this.currentUser) {
+                    return { success: false, message: 'Кіру керек' };
+                }
+                
+                const user = this.users.find(u => u.id === this.currentUser.id);
+                if (!user) return { success: false, message: 'Пайдаланушы табылмады' };
+                
+                const newPost = {
+                    id: this.posts.length + 1,
+                    user_id: this.currentUser.id,
+                    username: this.currentUser.username,
+                    title,
+                    content,
+                    category,
+                    image_url,
+                    likes: 0,
+                    comments: 0,
+                    created_at: new Date().toISOString().replace('T', ' ').substring(0, 19),
+                    avatar_url: user.avatar_url
+                };
+                
+                this.posts.unshift(newPost);
+                user.posts_count = (user.posts_count || 0) + 1;
+                this.saveData();
+                
+                return { success: true, message: 'Пост сәтті жарияланды!', post: newPost };
+            }
+            
+            // Посттарды жүктеу
+            loadPosts() {
+                const postsList = document.getElementById('postsList');
+                const allPostsList = document.getElementById('allPostsList');
+                const popularPostsList = document.getElementById('popularPostsList');
+                
+                if (!postsList) return;
+                
+                // Соңғы 5 постты көрсету
+                const latestPosts = this.posts.slice(0, 5);
+                
+                if (latestPosts.length > 0) {
+                    postsList.innerHTML = latestPosts.map(post => this.createPostHTML(post)).join('');
+                } else {
+                    postsList.innerHTML = `
+                        <div class="text-center py-5">
+                            <i class="fas fa-newspaper fa-4x text-muted mb-3"></i>
+                            <h5>Әлі посттар жоқ</h5>
+                            <p class="text-muted">Бірінші болып пост жариялаңыз!</p>
+                            ${!this.currentUser ? `
+                            <a href="#register" class="btn btn-primary page-link">
+                                <i class="fas fa-user-plus"></i> Тіркеліңіз
+                            </a>
+                            ` : ''}
+                        </div>
+                    `;
+                }
+                
+                // Барлық посттар
+                if (allPostsList) {
+                    allPostsList.innerHTML = this.posts.map(post => this.createPostHTML(post, true)).join('');
+                    document.getElementById('totalPostsCount').textContent = `${this.posts.length} пост`;
+                    
+                    // Кнопкалар
+                    const postsActions = document.getElementById('postsActions');
+                    if (this.currentUser) {
+                        postsActions.innerHTML = `
+                            <a href="#create-post" class="btn btn-primary page-link">
+                                <i class="fas fa-plus"></i> Жаңа пост жасау
+                            </a>
+                            <a href="#dashboard" class="btn btn-outline-primary page-link">
+                                <i class="fas fa-tachometer-alt"></i> Бақылау тақтасы
+                            </a>
+                        `;
+                    } else {
+                        postsActions.innerHTML = `
+                            <a href="#register" class="btn btn-success page-link">
+                                <i class="fas fa-user-plus"></i> Тіркелу
+                            </a>
+                            <a href="#login" class="btn btn-outline-success page-link">
+                                <i class="fas fa-sign-in-alt"></i> Кіру
+                            </a>
+                        `;
+                    }
+                }
+                
+                // Танымал посттар (лайк саны бойынша)
+                if (popularPostsList) {
+                    const popularPosts = [...this.posts].sort((a, b) => b.likes - a.likes).slice(0, 3);
+                    popularPostsList.innerHTML = popularPosts.map(post => `
+                        <a href="#post-${post.id}" class="list-group-item list-group-item-action post-link" data-post-id="${post.id}">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">${post.title || 'Тақырыпсыз'}</h6>
+                                <small class="text-muted">
+                                    <i class="fas fa-heart text-danger"></i> ${post.likes || 0}
+                                </small>
+                            </div>
+                            <small class="text-muted">@${post.username}</small>
+                        </a>
+                    `).join('');
+                }
+                
+                // Статистиканы жаңарту
+                document.getElementById('usersCount').textContent = `${this.users.length}+`;
+                document.getElementById('postsCount').textContent = `${this.posts.length}+`;
+            }
+            
+            // Пайдаланушы посттарын көрсету
+            displayUserPosts() {
+                const userPostsList = document.getElementById('userPostsList');
+                if (!userPostsList || !this.currentUser) return;
+                
+                const userPosts = this.posts.filter(post => post.user_id === this.currentUser.id);
+                
+                if (userPosts.length > 0) {
+                    userPostsList.innerHTML = `
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Тақырып</th>
+                                        <th>Күні</th>
+                                        <th>Лайктар</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${userPosts.map(post => `
+                                        <tr>
+                                            <td>
+                                                <a href="#post-${post.id}" class="text-decoration-none post-link" data-post-id="${post.id}">
+                                                    ${post.title || 'Тақырыпсыз'}
+                                                </a>
+                                            </td>
+                                            <td>${post.created_at.split(' ')[0]}</td>
+                                            <td>${post.likes || 0}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Профиль посттарын көрсету
+            displayProfilePosts() {
+                const profilePostsList = document.getElementById('profilePostsList');
+                if (!profilePostsList || !this.currentUser) return;
+                
+                const userPosts = this.posts.filter(post => post.user_id === this.currentUser.id);
+                
+                if (userPosts.length > 0) {
+                    profilePostsList.innerHTML = `
+                        <div class="list-group list-group-flush">
+                            ${userPosts.map(post => `
+                                <div class="list-group-item">
+                                    <div class="d-flex w-100 justify-content-between mb-2">
+                                        <h6 class="mb-0">
+                                            <a href="#post-${post.id}" class="text-decoration-none post-link" data-post-id="${post.id}">
+                                                ${post.title || 'Тақырыпсыз'}
+                                            </a>
+                                        </h6>
+                                        <small class="text-muted">
+                                            ${post.created_at.split(' ')[0]}
+                                        </small>
+                                    </div>
+                                    
+                                    <p class="mb-2">
+                                        ${post.content.length > 150 ? post.content.substring(0, 150) + '...' : post.content}
+                                    </p>
+                                    
+                                    <div class="d-flex justify-content-between">
+                                        <small class="text-muted">
+                                            <i class="far fa-heart"></i> ${post.likes || 0}
+                                            <i class="far fa-comment ms-2"></i> ${post.comments || 0}
+                                        </small>
+                                        
+                                        <div>
+                                            <a href="#post-${post.id}" class="btn btn-sm btn-outline-primary post-link" data-post-id="${post.id}">
+                                                Толығырақ
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    profilePostsList.innerHTML = `
+                        <div class="text-center py-5">
+                            <i class="fas fa-newspaper fa-4x text-muted mb-3"></i>
+                            <h5>Әлі посттар жоқ</h5>
+                            <p class="text-muted">Бірінші пост жариялау үшін төмендегі батырманы басыңыз</p>
+                            <a href="#create-post" class="btn btn-primary page-link">
+                                <i class="fas fa-plus"></i> Бірінші постты жасау
+                            </a>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Пост HTML құру
+            createPostHTML(post, showAll = false) {
+                const timeAgo = this.getTimeAgo(post.created_at);
+                
+                return `
+                    <div class="post-item mb-4 pb-3 border-bottom">
+                        <div class="d-flex align-items-center mb-2">
+                            <img src="${post.avatar_url}" 
+                                 alt="${post.username}" 
+                                 class="rounded-circle me-2" 
+                                 width="40" 
+                                 height="40">
+                            <div>
+                                <h6 class="mb-0">${post.username}</h6>
+                                <small class="text-muted">
+                                    <i class="far fa-clock"></i> ${timeAgo}
+                                    ${post.category ? `<span class="badge bg-secondary ms-2">${post.category}</span>` : ''}
+                                </small>
+                            </div>
+                        </div>
+                        
+                        <h5 class="mt-2">
+                            <a href="#post-${post.id}" class="text-decoration-none post-link" data-post-id="${post.id}">
+                                ${post.title || 'Тақырыпсыз'}
+                            </a>
+                        </h5>
+                        
+                        <p class="mb-2">
+                            ${showAll ? post.content : (post.content.length > 200 ? post.content.substring(0, 200) + '...' : post.content)}
+                        </p>
+                        
+                        ${post.image_url ? `<img src="${post.image_url}" alt="Post image" class="img-fluid rounded mb-2" style="max-height: 300px;">` : ''}
+                        
+                        <div class="d-flex justify-content-between text-muted">
+                            <small>
+                                <i class="far fa-heart"></i> ${post.likes || 0} лайк
+                            </small>
+                            <small>
+                                <i class="far fa-comment"></i> ${post.comments || 0} пікір
+                            </small>
+                            <small>
+                                <a href="#post-${post.id}" class="text-decoration-none post-link" data-post-id="${post.id}">
+                                    <i class="fas fa-external-link-alt"></i> Толығырақ
+                                </a>
+                            </small>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Уақыт аралығын есептеу
+            getTimeAgo(dateString) {
+                const postDate = new Date(dateString);
+                const now = new Date();
+                const diffMs = now - postDate;
+                const diffMins = Math.floor(diffMs / 60000);
+                const diffHours = Math.floor(diffMs / 3600000);
+                const diffDays = Math.floor(diffMs / 86400000);
+                
+                if (diffMins < 1) return 'жаңа';
+                if (diffMins < 60) return `${diffMins} мин бұрын`;
+                if (diffHours < 24) return `${diffHours} сағ бұрын`;
+                if (diffDays < 7) return `${diffDays} күн бұрын`;
+                return postDate.toLocaleDateString('kk-KZ');
+            }
+            
+            // Хабарлама көрсету
+            showMessage(message, type = 'success') {
+                const messageContainer = document.getElementById('messageContainer');
+                const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+                
+                messageContainer.innerHTML = `
+                    <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+                        ${message}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                `;
+                
+                // 5 секундтан кейін хабарламаны жою
+                setTimeout(() => {
+                    const alert = messageContainer.querySelector('.alert');
+                    if (alert) {
+                        alert.classList.remove('show');
+                        setTimeout(() => alert.remove(), 300);
+                    }
+                }, 5000);
+            }
+            
+            // Бетті көрсету
+            showPage(pageId) {
+                // Барлық беттерді жасыру
+                document.querySelectorAll('.page-content').forEach(page => {
+                    page.style.display = 'none';
+                });
+                
+                // Таңдалған бетті көрсету
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.style.display = 'block';
+                    
+                    // Навигацияны жаңарту
+                    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    
+                    const activeLink = document.querySelector(`.navbar-nav .nav-link[href="#${pageId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                    
+                    // Беттің үстіне көтерілу
+                    window.scrollTo(0, 0);
+                    
+                    // Посттарды жаңарту
+                    if (pageId === 'home' || pageId === 'posts') {
+                        this.loadPosts();
+                    }
+                    
+                    // Бақылау тақтасын жаңарту
+                    if (pageId === 'dashboard' && this.currentUser) {
+                        this.updateDashboard();
+                    }
+                    
+                    // Профильді жаңарту
+                    if (pageId === 'profile' && this.currentUser) {
+                        this.updateProfile();
+                    }
+                    
+                    // Профильді өңдеу бетін жаңарту
+                    if (pageId === 'edit-profile' && this.currentUser) {
+                        const user = this.users.find(u => u.id === this.currentUser.id);
+                        if (user) {
+                            document.getElementById('editUsername').value = user.username;
+                            document.getElementById('editEmail').value = user.email;
+                            document.getElementById('editFullName').value = user.full_name || '';
+                            document.getElementById('editBio').value = user.bio || '';
+                            document.getElementById('editAvatarPreview').src = user.avatar_url;
+                        }
+                    }
+                }
+            }
+            
+            // Іздеу функциясы
+            search(query) {
+                if (!query || query.trim().length < 2) {
+                    return { posts: [], users: [] };
+                }
+                
+                const searchTerm = query.toLowerCase();
+                const foundPosts = this.posts.filter(post => 
+                    (post.title && post.title.toLowerCase().includes(searchTerm)) ||
+                    (post.content && post.content.toLowerCase().includes(searchTerm)) ||
+                    (post.username && post.username.toLowerCase().includes(searchTerm))
+                );
+                
+                const foundUsers = this.users.filter(user =>
+                    (user.username && user.username.toLowerCase().includes(searchTerm)) ||
+                    (user.full_name && user.full_name.toLowerCase().includes(searchTerm))
+                );
+                
+                return { posts: foundPosts, users: foundUsers };
+            }
+            
+            // Пост табу
+            findPost(postId) {
+                return this.posts.find(post => post.id == postId);
+            }
+        }
+
+        // Платформаны бастау
+        const socialPlatform = new SocialPlatform();
+
+        // DOM жүктелгеннен кейін
+        document.addEventListener('DOMContentLoaded', function() {
+            // Беттер арасында навигация
+            document.querySelectorAll('.page-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('href').substring(1);
+                    socialPlatform.showPage(pageId);
+                });
+            });
+            
+            // Навигация линктері
+            document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('href').substring(1);
+                    socialPlatform.showPage(pageId);
+                });
+            });
+            
+            // Пост линктері
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('post-link') || e.target.closest('.post-link')) {
+                    e.preventDefault();
+                    const link = e.target.classList.contains('post-link') ? e.target : e.target.closest('.post-link');
+                    const postId = link.getAttribute('data-post-id');
+                    
+                    // Пост детальды бетін көрсету
+                    showPostDetail(postId);
+                }
+            });
+            
+            // Тіркелу формасы
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('regUsername').value.trim();
+                const email = document.getElementById('regEmail').value.trim();
+                const password = document.getElementById('regPassword').value;
+                const confirmPassword = document.getElementById('regConfirmPassword').value;
+                const fullName = document.getElementById('regFullName').value.trim();
+                
+                // Валидация
+                let isValid = true;
+                
+                // Пайдаланушы аты
+                if (username.length < 3) {
+                    document.getElementById('regUsername').classList.add('is-invalid');
+                    document.getElementById('usernameError').textContent = 'Пайдаланушы аты кемінде 3 таңба болуы керек';
+                    isValid = false;
+                } else {
+                    document.getElementById('regUsername').classList.remove('is-invalid');
+                }
+                
+                // Email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    document.getElementById('regEmail').classList.add('is-invalid');
+                    document.getElementById('emailError').textContent = 'Жарамды электрондық поштаны енгізіңіз';
+                    isValid = false;
+                } else {
+                    document.getElementById('regEmail').classList.remove('is-invalid');
+                }
+                
+                // Құпиясөз
+                if (password.length < 6) {
+                    document.getElementById('regPassword').classList.add('is-invalid');
+                    document.getElementById('passwordError').textContent = 'Құпиясөз кемінде 6 таңба болуы керек';
+                    isValid = false;
+                } else {
+                    document.getElementById('regPassword').classList.remove('is-invalid');
+                }
+                
+                // Құпиясөзді растау
+                if (password !== confirmPassword) {
+                    document.getElementById('regConfirmPassword').classList.add('is-invalid');
+                    document.getElementById('confirmPasswordError').textContent = 'Құпиясөздер сәйкес келмейді';
+                    isValid = false;
+                } else {
+                    document.getElementById('regConfirmPassword').classList.remove('is-invalid');
+                }
+                
+                // Шарттар
+                if (!document.getElementById('terms').checked) {
+                    socialPlatform.showMessage('Пайдалану шарттарымен келісу керек', 'error');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    const result = socialPlatform.register(username, email, password, fullName);
+                    if (result.success) {
+                        socialPlatform.showMessage(result.message, 'success');
+                        socialPlatform.showPage('login');
+                        document.getElementById('registerForm').reset();
+                    } else {
+                        socialPlatform.showMessage(result.message, 'error');
+                    }
+                }
+            });
+            
+            // Кіру формасы
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                const result = socialPlatform.login(email, password);
+                if (result.success) {
+                    socialPlatform.showMessage(result.message, 'success');
+                    socialPlatform.showPage('dashboard');
+                    document.getElementById('loginForm').reset();
+                } else {
+                    socialPlatform.showMessage(result.message, 'error');
+                }
+            });
+            
+            // Шығу
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                socialPlatform.logout();
+            });
+            
+            // Жаңа пост формасы
+            document.getElementById('createPostForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!socialPlatform.currentUser) {
+                    socialPlatform.showMessage('Пост жариялау үшін кіру керек', 'error');
+                    socialPlatform.showPage('login');
+                    return;
+                }
+                
+                const title = document.getElementById('postTitle').value.trim();
+                const content = document.getElementById('postContent').value.trim();
+                const category = document.getElementById('postCategory').value;
+                
+                // Валидация
+                let isValid = true;
+                
+                if (content.length === 0) {
+                    document.getElementById('postContent').classList.add('is-invalid');
+                    document.getElementById('contentError').textContent = 'Мазмұнды енгізу керек';
+                    isValid = false;
+                } else {
+                    document.getElementById('postContent').classList.remove('is-invalid');
+                }
+                
+                if (isValid) {
+                    const result = socialPlatform.addPost(title, content, category);
+                    if (result.success) {
+                        socialPlatform.showMessage(result.message, 'success');
+                        socialPlatform.showPage('dashboard');
+                        document.getElementById('createPostForm').reset();
+                        document.getElementById('charCount').textContent = '0 таңба';
+                        document.getElementById('imagePreview').style.display = 'none';
+                        
+                        // Посттарды жаңарту
+                        socialPlatform.loadPosts();
+                        socialPlatform.updateDashboard();
+                    } else {
+                        socialPlatform.showMessage(result.message, 'error');
+                    }
+                }
+            });
+            
+            // Профильді өңдеу формасы
+            document.getElementById('editProfileForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (!socialPlatform.currentUser) return;
+                
+                const fullName = document.getElementById('editFullName').value.trim();
+                const bio = document.getElementById('editBio').value.trim();
+                const avatarFile = document.getElementById('editAvatar').files[0];
+                
+                const userIndex = socialPlatform.users.findIndex(u => u.id === socialPlatform.currentUser.id);
+                if (userIndex !== -1) {
+                    socialPlatform.users[userIndex].full_name = fullName;
+                    socialPlatform.users[userIndex].bio = bio;
+                    
+                    // Аватарды жаңарту
+                    if (avatarFile) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            socialPlatform.users[userIndex].avatar_url = e.target.result;
+                            socialPlatform.saveData();
+                            socialPlatform.updateProfile();
+                            socialPlatform.updateDashboard();
+                            socialPlatform.showMessage('Профиль сәтті жаңартылды', 'success');
+                        };
+                        reader.readAsDataURL(avatarFile);
+                    } else {
+                        socialPlatform.saveData();
+                        socialPlatform.updateProfile();
+                        socialPlatform.updateDashboard();
+                        socialPlatform.showMessage('Профиль сәтті жаңартылды', 'success');
+                    }
+                    
+                    socialPlatform.showPage('profile');
+                }
+            });
+            
+            // Сурет алдын ала қарау
+            document.getElementById('postImage').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        document.getElementById('imagePreview').src = e.target.result;
+                        document.getElementById('imagePreview').style.display = 'block';
+                    };
+                    
+                    reader.readAsDataURL(file);
+                } else {
+                    document.getElementById('imagePreview').style.display = 'none';
+                }
+            });
+            
+            document.getElementById('editAvatar').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        document.getElementById('editAvatarPreview').src = e.target.result;
+                    };
+                    
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Мәтін санағыш
+            document.getElementById('postContent').addEventListener('input', function() {
+                const count = this.value.length;
+                document.getElementById('charCount').textContent = `${count} таңба`;
+                
+                if (count > 1000) {
+                    document.getElementById('charCount').style.color = '#dc3545';
+                } else if (count > 500) {
+                    document.getElementById('charCount').style.color = '#ffc107';
+                } else {
+                    document.getElementById('charCount').style.color = '#198754';
+                }
+            });
+            
+            // Іздеу формасы
+            document.getElementById('searchForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const query = document.getElementById('searchInput').value.trim();
+                if (query) {
+                    socialPlatform.showPage('search');
+                    performSearch(query);
+                }
+            });
+            
+            document.getElementById('searchPageForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const query = document.getElementById('searchPageInput').value.trim();
+                if (query) {
+                    performSearch(query);
+                }
+            });
+            
+            // Құпиясөзді өзгерту
+            document.getElementById('changePasswordBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                socialPlatform.showMessage('Бұл функция әлі іске асырылмаған', 'info');
+            });
+            
+            // Аккаунтты жою
+            document.getElementById('deleteAccountBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('Аккаунтыңызды жойғыңыз келетініне сенімдісіз бе? Бұл әрекетті қайтару мүмкін емес.')) {
+                    socialPlatform.showMessage('Аккаунт жойылды', 'success');
+                    socialPlatform.logout();
+                }
+            });
+            
+            // Бастапқы бетті көрсету
+            socialPlatform.showPage('home');
+        });
+        
+        // Іздеуді орындау
+        function performSearch(query) {
+            const results = socialPlatform.search(query);
+            const searchResults = document.getElementById('searchResults');
+            
+            if (results.posts.length === 0 && results.users.length === 0) {
+                searchResults.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-search fa-4x text-muted mb-3"></i>
+                        <h4>"${query}" бойынша ешнәрсе табылмады</h4>
+                        <p class="text-muted mb-4">Басқа сөздермен қайта іздеп көріңіз</p>
+                    </div>
+                `;
+            } else {
+                let html = `
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i> 
+                        ${results.posts.length} пост және ${results.users.length} пайдаланушы табылды
+                    </div>
+                `;
+                
+                if (results.users.length > 0) {
+                    html += `
+                        <div class="mb-5">
+                            <h5 class="mb-3">
+                                <i class="fas fa-users"></i> Пайдаланушылар
+                                <span class="badge bg-success">${results.users.length}</span>
+                            </h5>
+                            
+                            <div class="row">
+                                ${results.users.map(user => `
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body text-center">
+                                                <img src="${user.avatar_url}" 
+                                                     alt="${user.username}" 
+                                                     class="rounded-circle mb-3" 
+                                                     width="80" 
+                                                     height="80">
+                                                
+                                                <h6 class="card-title mb-1">
+                                                    ${user.username}
+                                                </h6>
+                                                
+                                                ${user.full_name ? `<p class="text-muted mb-2">${user.full_name}</p>` : ''}
+                                                
+                                                <button class="btn btn-sm btn-outline-primary view-profile-btn" data-user-id="${user.id}">
+                                                    Профильді көру
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                if (results.posts.length > 0) {
+                    html += `
+                        <div>
+                            <h5 class="mb-3">
+                                <i class="fas fa-newspaper"></i> Посттар
+                                <span class="badge bg-primary">${results.posts.length}</span>
+                            </h5>
+                            
+                            <div class="list-group">
+                                ${results.posts.map(post => `
+                                    <a href="#post-${post.id}" class="list-group-item list-group-item-action post-link" data-post-id="${post.id}">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h6 class="mb-1">${post.title || 'Тақырыпсыз'}</h6>
+                                            <small class="text-muted">
+                                                ${post.created_at.split(' ')[0]}
+                                            </small>
+                                        </div>
+                                        
+                                        <p class="mb-1">
+                                            ${post.content.length > 200 ? post.content.substring(0, 200) + '...' : post.content}
+                                        </p>
+                                        
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">
+                                                <i class="fas fa-user"></i> @${post.username}
+                                                ${post.category ? `<span class="badge bg-secondary ms-2">${post.category}</span>` : ''}
+                                            </small>
+                                            
+                                            <small class="text-muted">
+                                                <i class="far fa-heart"></i> ${post.likes || 0}
+                                                <i class="far fa-comment ms-2"></i> ${post.comments || 0}
+                                            </small>
+                                        </div>
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                searchResults.innerHTML = html;
+                
+                // Профильді көру батырмалары
+                document.querySelectorAll('.view-profile-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const userId = this.getAttribute('data-user-id');
+                        const user = socialPlatform.users.find(u => u.id == userId);
+                        if (user) {
+                            // Профиль бетіне өту
+                            socialPlatform.showPage('profile');
+                            // Бұл пайдаланушының профилін көрсету (жеңілдетілген)
+                            alert(`${user.username} профилі. Бұл функция толық нұсқада қол жетімді болады.`);
+                        }
+                    });
+                });
+            }
+        }
+        
+        // Пост детальды бетін көрсету
+        function showPostDetail(postId) {
+            const post = socialPlatform.findPost(postId);
+            if (!post) return;
+            
+            const postDetailHTML = `
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- Пост жоғарғы бөлігі -->
+                                <div class="d-flex align-items-center mb-4">
+                                    <img src="${post.avatar_url}" 
+                                         alt="${post.username}" 
+                                         class="rounded-circle me-3" 
+                                         width="60" 
+                                         height="60">
+                                    <div>
+                                        <h5 class="mb-0">${post.username}</h5>
+                                        <small class="text-muted">
+                                            <i class="far fa-clock"></i> ${socialPlatform.getTimeAgo(post.created_at)}
+                                            ${post.category ? `<span class="badge bg-secondary ms-2">${post.category}</span>` : ''}
+                                        </small>
+                                    </div>
+                                </div>
+                                
+                                <!-- Пост мазмұны -->
+                                <h2 class="card-title mb-4">${post.title || 'Тақырыпсыз'}</h2>
+                                
+                                <div class="post-content mb-4">
+                                    ${post.content.replace(/\n/g, '<br>')}
+                                </div>
+                                
+                                ${post.image_url ? `
+                                <div class="mb-4 text-center">
+                                    <img src="${post.image_url}" alt="Post image" class="img-fluid rounded" style="max-height: 500px;">
+                                </div>
+                                ` : ''}
+                                
+                                <!-- Лайк және пікір статистикасы -->
+                                <div class="d-flex justify-content-between align-items-center border-top border-bottom py-3 mb-4">
+                                    <div>
+                                        <button class="btn btn-outline-danger">
+                                            <i class="far fa-heart"></i>
+                                            <span>${post.likes || 0}</span> Лайк
+                                        </button>
+                                        
+                                        <button class="btn btn-outline-primary ms-2">
+                                            <i class="far fa-comment"></i> 
+                                            <span>${post.comments || 0}</span> Пікір
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Пікір қосу -->
+                                ${socialPlatform.currentUser ? `
+                                <div class="mb-5">
+                                    <form id="commentForm-${post.id}">
+                                        <div class="d-flex align-items-start mb-3">
+                                            <img src="${socialPlatform.users.find(u => u.id === socialPlatform.currentUser.id)?.avatar_url || 'https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff'}" 
+                                                 alt="${socialPlatform.currentUser.username}" 
+                                                 class="rounded-circle me-3" 
+                                                 width="48" 
+                                                 height="48">
+                                            <div class="flex-grow-1">
+                                                <textarea class="form-control" 
+                                                          id="commentContent-${post.id}" 
+                                                          name="content" 
+                                                          rows="3" 
+                                                          placeholder="Пікіріңізді жазыңыз..." 
+                                                          required></textarea>
+                                                <div class="mt-2 text-end">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="fas fa-paper-plane"></i> Пікір қосу
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                ` : `
+                                <div class="alert alert-info mb-5">
+                                    <i class="fas fa-info-circle"></i> Пікір қалдыру үшін 
+                                    <a href="#login" class="alert-link page-link">жүйеге кіріңіз</a> немесе 
+                                    <a href="#register" class="alert-link page-link">тіркеліңіз</a>.
+                                </div>
+                                `}
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <a href="#home" class="btn btn-outline-primary page-link">
+                                <i class="fas fa-arrow-left"></i> Басты бетке оралу
+                            </a>
+                            <a href="#posts" class="btn btn-outline-secondary page-link ms-2">
+                                <i class="fas fa-newspaper"></i> Барлық посттар
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Уақытша пост детальды бетін көрсету
+            const tempContainer = document.createElement('div');
+            tempContainer.innerHTML = postDetailHTML;
+            tempContainer.classList.add('page-content');
+            tempContainer.id = 'post-detail';
+            
+            // Қазіргі бетті жасыру
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Негізгі мазмұнға қосу
+            document.querySelector('main').appendChild(tempContainer);
+            
+            // Пікір формасы
+            if (socialPlatform.currentUser) {
+                document.getElementById(`commentForm-${post.id}`).addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const content = document.getElementById(`commentContent-${post.id}`).value.trim();
+                    if (content) {
+                        socialPlatform.showMessage('Пікір қосылды!', 'success');
+                        document.getElementById(`commentContent-${post.id}`).value = '';
+                    }
+                });
+            }
+            
+            // Навигацияны жаңарту
+            document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+        }
+    </script>
+</body>
+</html>
