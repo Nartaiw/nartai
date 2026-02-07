@@ -3,157 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nartai</title>
-    <!-- Bootstrap CSS -->
+    <title>Nartai - Әлеуметтік Платформа</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css@3.5.0/css/flag-icon.min.css">
     <style>
-        /* Барлық CSS стильдері осында */
         :root {
-            --primary-color: #0d6efd;
-            --secondary-color: #6c757d;
-            --success-color: #198754;
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --success-color: #28a745;
             --danger-color: #dc3545;
-            --warning-color: #ffc107;
-            --info-color: #0dcaf0;
-            --light-color: #f8f9fa;
-            --dark-color: #212529;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            margin-bottom: 20px;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-header {
-            border-radius: 15px 15px 0 0 !important;
-            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
         }
 
         .navbar {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 0.8rem 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .navbar-brand {
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-
-        .navbar-nav .nav-link {
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            margin: 0 2px;
-            transition: all 0.3s ease;
-        }
-
-        .navbar-nav .nav-link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding: 30px;
         }
 
         .post-card {
-            border-left: 4px solid var(--primary-color);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+            margin-bottom: 20px;
+            background: white;
         }
 
         .post-card:hover {
-            border-left-color: var(--success-color);
-        }
-
-        .post-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #444;
-        }
-
-        .btn {
-            border-radius: 8px;
-            padding: 0.5rem 1.5rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), #0b5ed7);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             border: none;
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-weight: 600;
         }
 
         .btn-primary:hover {
-            background: linear-gradient(135deg, #0b5ed7, #0a58ca);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border: 3px solid var(--primary-color);
+        }
+
+        .like-btn {
+            transition: all 0.3s ease;
+        }
+
+        .like-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .like-btn.liked {
+            color: var(--danger-color);
+            transform: scale(1.1);
+        }
+
+        .language-switcher {
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 10px;
+            background: rgba(74, 111, 165, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .language-switcher:hover {
+            background: rgba(74, 111, 165, 0.2);
+        }
+
+        .site-brand {
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.8rem;
+        }
+
+        .post-image {
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .comment-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            margin-top: 50px;
+            padding: 30px 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
         .form-control, .form-select {
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
             transition: all 0.3s ease;
         }
 
         .form-control:focus, .form-select:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+            box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.25);
         }
 
-        footer {
-            margin-top: auto;
-        }
-
-        footer .social-links a {
-            transition: transform 0.3s ease;
-        }
-
-        footer .social-links a:hover {
-            transform: translateY(-3px);
+        .alert {
+            border-radius: 10px;
+            border: none;
         }
 
         @media (max-width: 768px) {
-            .navbar-brand {
-                font-size: 1.2rem;
+            .main-container {
+                padding: 20px;
+                margin-top: 15px;
+                margin-bottom: 15px;
             }
             
-            .card {
-                border-radius: 10px;
-            }
-            
-            .btn {
-                padding: 0.4rem 1rem;
+            .site-brand {
+                font-size: 1.4rem;
             }
         }
 
-        .is-invalid {
-            border-color: var(--danger-color);
+        /* Анимациялар */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .invalid-feedback {
-            color: var(--danger-color);
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.3s ease-in-out;
+        }
+
+        /* Скролл стильдері */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+        }
+
+        /* Профиль стильдері */
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border: 5px solid white;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Төмендеу анимациясы */
+        .slide-down {
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
     <!-- Навигация -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
             <a class="navbar-brand" href="#home">
-                <i class="fas fa-users"></i> Nartai NetWork
+                <span class="site-brand">NARTAI</span>
+                <small class="text-muted ms-2">https://nartai.netlify.app/</small>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -164,64 +263,57 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#home">
-                            <i class="fas fa-home"></i> Басты бет
+                            <i class="fas fa-home"></i> <span data-translate="home">Басты бет</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#posts">
-                            <i class="fas fa-newspaper"></i> Посттар
+                            <i class="fas fa-newspaper"></i> <span data-translate="posts">Барлық посттар</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#create-post">
-                            <i class="fas fa-edit"></i> Жаңа пост
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#dashboard">
-                            <i class="fas fa-tachometer-alt"></i> Бақылау тақтасы
+                            <i class="fas fa-plus-circle"></i> <span data-translate="new_post">Пост жасау</span>
                         </a>
                     </li>
                 </ul>
                 
-                <form class="d-flex me-2" id="searchForm">
-                    <input class="form-control me-2" type="search" id="searchInput" placeholder="Іздеу..." aria-label="Іздеу">
-                    <button class="btn btn-outline-light" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
+                <!-- Тіл ауыстыру -->
+                <div class="navbar-text me-3 language-switcher" id="languageSwitcher">
+                    <span class="flag-icon flag-icon-kz"></span>
+                    <span data-translate="language">Қаз</span>
+                </div>
                 
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown" id="userMenu" style="display: none;">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
-                            <img src="https://ui-avatars.com/api/?name=Пайдаланушы&background=0D8ABC&color=fff" 
-                                 alt="Avatar" class="rounded-circle" width="30" height="30">
-                            <span id="usernameDisplay">Пайдаланушы</span>
+                <!-- Пайдаланушы мәзірі -->
+                <div class="navbar-nav">
+                    <div class="nav-item dropdown" id="loggedInMenu" style="display: none;">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" data-bs-toggle="dropdown">
+                            <img id="userAvatar" src="https://ui-avatars.com/api/?name=Қонақ&background=4a6fa5&color=fff" 
+                                 class="rounded-circle user-avatar me-2">
+                            <span id="usernameDisplay">Қонақ</span>
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#profile">
-                                <i class="fas fa-user"></i> Менің профилім
+                                <i class="fas fa-user-circle"></i> <span data-translate="my_profile">Профиль</span>
                             </a></li>
-                            <li><a class="dropdown-item" href="#edit-profile">
-                                <i class="fas fa-cog"></i> Профильді өңдеу
+                            <li><a class="dropdown-item" href="#create-post">
+                                <i class="fas fa-edit"></i> <span data-translate="create_post">Пост жасау</span>
                             </a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" id="logoutBtn">
-                                <i class="fas fa-sign-out-alt"></i> Шығу
+                            <li><a class="dropdown-item text-danger" href="#" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> <span data-translate="logout">Шығу</span>
                             </a></li>
                         </ul>
-                    </li>
-                    <li class="nav-item" id="loginMenu">
-                        <a class="nav-link" href="#login">
-                            <i class="fas fa-sign-in-alt"></i> Кіру
+                    </div>
+                    <div class="nav-item" id="guestMenu">
+                        <a class="btn btn-outline-primary me-2" href="#login">
+                            <i class="fas fa-sign-in-alt"></i> <span data-translate="login">Кіру</span>
                         </a>
-                    </li>
-                    <li class="nav-item" id="registerMenu">
-                        <a class="nav-link" href="#register">
-                            <i class="fas fa-user-plus"></i> Тіркелу
+                        <a class="btn btn-primary" href="#register">
+                            <i class="fas fa-user-plus"></i> <span data-translate="register">Тіркелу</span>
                         </a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -229,89 +321,157 @@
     <!-- Хабарламалар -->
     <div class="container mt-3" id="messageContainer"></div>
 
-    <!-- Негізгі мазмұн -->
-    <main class="container my-4">
+    <!-- Негізгі контент -->
+    <div class="container main-container fade-in">
         <!-- Басты бет -->
         <div id="home" class="page-content">
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <div class="text-center mb-5">
+                        <h1 class="display-4 fw-bold mb-3" style="background: linear-gradient(135deg, #4a6fa5, #166088); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            Nartai - Барлығына ашық платформа
+                        </h1>
+                        <p class="lead text-muted" data-translate="site_description">
+                            nartai.netlify.app - Сіздің посттарыңыз барлық пайдаланушыларға, барлық құрылғыларға көрінеді!
+                        </p>
+                        <div class="mt-4">
+                            <a href="#create-post" class="btn btn-primary btn-lg me-3">
+                                <i class="fas fa-plus"></i> <span data-translate="create_first_post">Бірінші постыңызды жасаңыз</span>
+                            </a>
+                            <a href="#posts" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-eye"></i> <span data-translate="view_posts">Посттарды көру</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-8">
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h4 class="mb-0"><i class="fas fa-fire"></i> Соңғы посттар</h4>
+                    <!-- Жаңа посттар -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 py-3">
+                            <h4 class="mb-0">
+                                <i class="fas fa-bolt text-warning me-2"></i>
+                                <span data-translate="latest_posts">Жаңа посттар</span>
+                                <span class="badge bg-primary ms-2" id="realtimePostsCount">0</span>
+                                <small class="text-muted ms-3" id="lastUpdateTime"></small>
+                            </h4>
                         </div>
-                        <div class="card-body" id="postsList">
-                            <!-- Посттар осында көрсетіледі -->
-                            <div class="text-center py-5">
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="visually-hidden">Жүктелуде...</span>
+                        <div class="card-body">
+                            <div id="postsList">
+                                <!-- Посттар осында көрсетіледі -->
+                                <div class="text-center py-5">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Жүктелуде...</span>
+                                    </div>
+                                    <p class="mt-3">Посттар жүктелуде...</p>
                                 </div>
-                                <p class="mt-3">Посттар жүктелуде...</p>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Нақты уақытта пост қосу -->
+                    <div class="card border-0 shadow-sm mt-4">
+                        <div class="card-header bg-white border-0 py-3">
+                            <h5 class="mb-0">
+                                <i class="fas fa-paper-plane text-primary me-2"></i>
+                                <span data-translate="quick_post">Жылдам пост жасау</span>
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="quickPostForm">
+                                <div class="mb-3">
+                                    <textarea class="form-control" id="quickPostContent" rows="3" 
+                                              placeholder="Не туралы ойлайсыз?" required></textarea>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted" data-translate="post_visible_to_all">
+                                        Пост барлық пайдаланушыларға көрінеді
+                                    </small>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane"></i> <span data-translate="publish">Жариялау</span>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
                 
                 <div class="col-md-4">
-                    <!-- Жаңа тіркелгендер -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0"><i class="fas fa-user-friends"></i> Жаңа пайдаланушылар</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="list-group">
-                                <div class="list-group-item">
-                                    <div class="d-flex align-items-center">
-                                        <img src="https://ui-avatars.com/api/?name=Администратор&background=198754&color=fff" 
-                                             alt="User" class="rounded-circle me-2" width="40" height="40">
-                                        <div>
-                                            <h6 class="mb-0">Администратор</h6>
-                                            <small class="text-muted">Сайт әкімшісі</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-group-item">
-                                    <div class="d-flex align-items-center">
-                                        <img src="https://ui-avatars.com/api/?name=User1&background=0D8ABC&color=fff" 
-                                             alt="User" class="rounded-circle me-2" width="40" height="40">
-                                        <div>
-                                            <h6 class="mb-0">user1</h6>
-                                            <small class="text-muted">Бірінші пайдаланушы</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <!-- Статистика -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-info text-white">
-                            <h5 class="mb-0"><i class="fas fa-chart-bar"></i> Статистика</h5>
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-white border-0 py-3">
+                            <h5 class="mb-0">
+                                <i class="fas fa-chart-line text-success me-2"></i>
+                                <span data-translate="realtime_stats">Нақты уақыт статистикасы</span>
+                            </h5>
                         </div>
                         <div class="card-body">
                             <div class="row text-center">
-                                <div class="col-6">
-                                    <h3 id="usersCount">100+</h3>
-                                    <small class="text-muted">Пайдаланушы</small>
+                                <div class="col-6 mb-3">
+                                    <div class="stat-card">
+                                        <div class="stat-number" id="liveUsersCount">0</div>
+                                        <div class="text-muted" data-translate="online_users">Онлайн</div>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="stat-card">
+                                        <div class="stat-number" id="totalPostsCount">0</div>
+                                        <div class="text-muted" data-translate="total_posts">Посттар</div>
+                                    </div>
                                 </div>
                                 <div class="col-6">
-                                    <h3 id="postsCount">500+</h3>
-                                    <small class="text-muted">Посттар</small>
+                                    <div class="stat-card">
+                                        <div class="stat-number" id="todayPostsCount">0</div>
+                                        <div class="text-muted" data-translate="today_posts">Бүгін</div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="stat-card">
+                                        <div class="stat-number" id="totalLikesCount">0</div>
+                                        <div class="text-muted" data-translate="total_likes">Лайктар</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Шабыт сөздер -->
-                    <div class="card">
-                        <div class="card-header bg-warning text-dark">
-                            <h5 class="mb-0"><i class="fas fa-quote-left"></i> Шабыт сөздер</h5>
+
+                    <!-- Жаңа пайдаланушылар -->
+                    <div class="card border-0 shadow-sm mb-4">
+                        <div class="card-header bg-white border-0 py-3">
+                            <h5 class="mb-0">
+                                <i class="fas fa-user-plus text-info me-2"></i>
+                                <span data-translate="recent_users">Жаңа пайдаланушылар</span>
+                            </h5>
                         </div>
                         <div class="card-body">
-                            <blockquote class="blockquote mb-0">
-                                <p>"Білім - бұл ең қуатты қару."</p>
-                                <footer class="blockquote-footer">Абай Құнанбаев</footer>
-                            </blockquote>
+                            <div id="recentUsersList">
+                                <!-- Жаңа пайдаланушылар осында көрсетіледі -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ақпарат -->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 py-3">
+                            <h5 class="mb-0">
+                                <i class="fas fa-info-circle text-primary me-2"></i>
+                                <span data-translate="important_info">Маңызды ақпарат</span>
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-info">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong data-translate="info_title">ЕСКЕРТУ!</strong>
+                                <p class="mb-0 mt-2" data-translate="info_content">
+                                    Бұл платформадағы барлық посттар БАРЛЫҚ пайдаланушыларға көрінеді. 
+                                    Сіздің посттарыңыз басқа телефондарда, компьютерлерде де көрінеді.
+                                </p>
+                            </div>
+                            <div class="text-center mt-3">
+                                <small class="text-muted">https://nartai.netlify.app/</small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -322,93 +482,73 @@
         <div id="register" class="page-content" style="display: none;">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h4 class="mb-0"><i class="fas fa-user-plus"></i> Жаңа пайдаланушыны тіркеу</h4>
-                        </div>
-                        <div class="card-body">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <h3 class="fw-bold">
+                                    <i class="fas fa-user-plus text-primary me-2"></i>
+                                    <span data-translate="register_title">Тіркелу</span>
+                                </h3>
+                                <p class="text-muted" data-translate="register_subtitle">
+                                    Nartai платформасына қосылыңыз
+                                </p>
+                            </div>
+                            
                             <form id="registerForm">
                                 <div class="mb-3">
-                                    <label for="regUsername" class="form-label">
-                                        <i class="fas fa-user"></i> Пайдаланушы аты *
+                                    <label class="form-label" data-translate="username">
+                                        <i class="fas fa-user"></i> Пайдаланушы аты
                                     </label>
-                                    <input type="text" 
-                                           class="form-control" 
-                                           id="regUsername" 
-                                           name="username" 
-                                           required
-                                           minlength="3">
-                                    <div class="invalid-feedback" id="usernameError"></div>
-                                    <small class="form-text text-muted">Кемінде 3 таңба болуы керек</small>
+                                    <input type="text" class="form-control" id="regUsername" required minlength="3">
+                                    <small class="text-muted" data-translate="username_hint">
+                                        Кемінде 3 таңба
+                                    </small>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="regEmail" class="form-label">
-                                        <i class="fas fa-envelope"></i> Электрондық пошта *
+                                    <label class="form-label" data-translate="email">
+                                        <i class="fas fa-envelope"></i> Электрондық пошта
                                     </label>
-                                    <input type="email" 
-                                           class="form-control" 
-                                           id="regEmail" 
-                                           name="email" 
-                                           required>
-                                    <div class="invalid-feedback" id="emailError"></div>
+                                    <input type="email" class="form-control" id="regEmail" required>
                                 </div>
                                 
-                                <div class="mb-3">
-                                    <label for="regFullName" class="form-label">
-                                        <i class="fas fa-id-card"></i> Толық аты
-                                    </label>
-                                    <input type="text" 
-                                           class="form-control" 
-                                           id="regFullName" 
-                                           name="full_name">
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="regPassword" class="form-label">
-                                        <i class="fas fa-lock"></i> Құпиясөз *
-                                    </label>
-                                    <input type="password" 
-                                           class="form-control" 
-                                           id="regPassword" 
-                                           name="password" 
-                                           required
-                                           minlength="6">
-                                    <div class="invalid-feedback" id="passwordError"></div>
-                                    <small class="form-text text-muted">Кемінде 6 таңба болуы керек</small>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="regConfirmPassword" class="form-label">
-                                        <i class="fas fa-lock"></i> Құпиясөзді қайталаңыз *
-                                    </label>
-                                    <input type="password" 
-                                           class="form-control" 
-                                           id="regConfirmPassword" 
-                                           name="confirmPassword" 
-                                           required>
-                                    <div class="invalid-feedback" id="confirmPasswordError"></div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label" data-translate="password">
+                                            <i class="fas fa-lock"></i> Құпиясөз
+                                        </label>
+                                        <input type="password" class="form-control" id="regPassword" required minlength="6">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label" data-translate="confirm_password">
+                                            <i class="fas fa-lock"></i> Құпиясөзді растау
+                                        </label>
+                                        <input type="password" class="form-control" id="regConfirmPassword" required>
+                                    </div>
                                 </div>
                                 
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
-                                    <label class="form-check-label" for="terms">
-                                        Мен <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">пайдалану шарттарымен</a> келісемін
+                                    <input type="checkbox" class="form-check-input" id="terms" required>
+                                    <label class="form-check-label" for="terms" data-translate="agree_terms">
+                                        Мен шарттармен келісемін
                                     </label>
                                 </div>
                                 
                                 <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-user-plus"></i> Тіркелу
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-user-plus"></i>
+                                        <span data-translate="register_button">Тіркелу</span>
                                     </button>
                                     <a href="#login" class="btn btn-outline-secondary page-link">
-                                        <i class="fas fa-sign-in-alt"></i> Кіру бетіне өту
+                                        <i class="fas fa-sign-in-alt"></i>
+                                        <span data-translate="already_have_account">Аккаунтыңыз бар ма?</span>
                                     </a>
                                 </div>
                             </form>
-                        </div>
-                        <div class="card-footer text-center">
-                            <small class="text-muted">* Міндетті өрістер</small>
+                            
+                            <div class="text-center mt-4">
+                                <small class="text-muted">https://nartai.netlify.app/</small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -419,160 +559,64 @@
         <div id="login" class="page-content" style="display: none;">
             <div class="row justify-content-center">
                 <div class="col-md-5">
-                    <div class="card">
-                        <div class="card-header bg-success text-white">
-                            <h4 class="mb-0"><i class="fas fa-sign-in-alt"></i> Жүйеге кіру</h4>
-                        </div>
-                        <div class="card-body">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <h3 class="fw-bold">
+                                    <i class="fas fa-sign-in-alt text-primary me-2"></i>
+                                    <span data-translate="login_title">Кіру</span>
+                                </h3>
+                                <p class="text-muted" data-translate="login_subtitle">
+                                    Nartai платформасына кіріңіз
+                                </p>
+                            </div>
+                            
                             <form id="loginForm">
                                 <div class="mb-3">
-                                    <label for="loginEmail" class="form-label">
+                                    <label class="form-label" data-translate="email">
                                         <i class="fas fa-envelope"></i> Электрондық пошта
                                     </label>
-                                    <input type="email" class="form-control" id="loginEmail" name="email" required>
+                                    <input type="email" class="form-control" id="loginEmail" required>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="loginPassword" class="form-label">
+                                    <label class="form-label" data-translate="password">
                                         <i class="fas fa-lock"></i> Құпиясөз
                                     </label>
-                                    <input type="password" class="form-control" id="loginPassword" name="password" required>
+                                    <input type="password" class="form-control" id="loginPassword" required>
                                     <div class="text-end mt-1">
-                                        <a href="#" class="small text-decoration-none">Құпиясөзді ұмыттым?</a>
+                                        <a href="#" class="small text-decoration-none" data-translate="forgot_password">
+                                            Құпиясөзді ұмыттым?
+                                        </a>
                                     </div>
                                 </div>
                                 
                                 <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                                    <label class="form-check-label" for="remember">Мені есте сақтау</label>
+                                    <input type="checkbox" class="form-check-input" id="remember">
+                                    <label class="form-check-label" for="remember" data-translate="remember_me">
+                                        Есте сақтау
+                                    </label>
                                 </div>
                                 
                                 <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-success">
-                                        <i class="fas fa-sign-in-alt"></i> Кіру
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-sign-in-alt"></i>
+                                        <span data-translate="login_button">Кіру</span>
                                     </button>
                                     <a href="#register" class="btn btn-outline-primary page-link">
-                                        <i class="fas fa-user-plus"></i> Тіркелу
+                                        <i class="fas fa-user-plus"></i>
+                                        <span data-translate="no_account">Аккаунтыңыз жоқ па?</span>
                                     </a>
                                 </div>
                             </form>
-                        </div>
-                        <div class="card-footer text-center">
-                            <small class="text-muted">Сынақ үшін: admin@example.com / 123456</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Бақылау тақтасы -->
-        <div id="dashboard" class="page-content" style="display: none;">
-            <div class="row">
-                <div class="col-md-3">
-                    <!-- Профиль карточкасы -->
-                    <div class="card mb-4">
-                        <div class="card-body text-center">
-                            <img id="dashboardAvatar" 
-                                 src="https://ui-avatars.com/api/?name=Пайдаланушы&background=0D8ABC&color=fff" 
-                                 alt="Пайдаланушы" 
-                                 class="rounded-circle mb-3" 
-                                 width="120" 
-                                 height="120">
-                            <h4 id="dashboardName">Пайдаланушы</h4>
-                            <p class="text-muted" id="dashboardUsername">@username</p>
-                            <p id="dashboardEmail">email@example.com</p>
-                            <a href="#profile" class="btn btn-outline-primary btn-sm page-link">
-                                <i class="fas fa-eye"></i> Профильді көру
-                            </a>
-                            <a href="#edit-profile" class="btn btn-outline-secondary btn-sm page-link">
-                                <i class="fas fa-edit"></i> Өңдеу
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Статистика -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h6 class="mb-0"><i class="fas fa-chart-pie"></i> Статистика</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="list-group list-group-flush">
-                                <div class="list-group-item d-flex justify-content-between">
-                                    <span>Посттар:</span>
-                                    <span class="badge bg-primary rounded-pill" id="userPostsCount">0</span>
+                            
+                            <div class="text-center mt-4">
+                                <small class="text-muted">https://nartai.netlify.app/</small>
+                                <div class="mt-2">
+                                    <small class="text-muted">
+                                        Сынақ аккаунты: test@nartai.kz / 123456
+                                    </small>
                                 </div>
-                                <div class="list-group-item d-flex justify-content-between">
-                                    <span>Лайктар:</span>
-                                    <span class="badge bg-success rounded-pill" id="userLikesCount">0</span>
-                                </div>
-                                <div class="list-group-item d-flex justify-content-between">
-                                    <span>Пікірлер:</span>
-                                    <span class="badge bg-info rounded-pill" id="userCommentsCount">0</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-9">
-                    <!-- Жылдам әрекеттер -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0"><i class="fas fa-bolt"></i> Жылдам әрекеттер</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3 mb-2">
-                                    <a href="#create-post" class="btn btn-success w-100 page-link">
-                                        <i class="fas fa-plus"></i> Пост жасау
-                                    </a>
-                                </div>
-                                <div class="col-md-3 mb-2">
-                                    <a href="#edit-profile" class="btn btn-info w-100 page-link">
-                                        <i class="fas fa-user-edit"></i> Профильді өңдеу
-                                    </a>
-                                </div>
-                                <div class="col-md-3 mb-2">
-                                    <a href="#posts" class="btn btn-warning w-100 page-link">
-                                        <i class="fas fa-newspaper"></i> Барлық посттар
-                                    </a>
-                                </div>
-                                <div class="col-md-3 mb-2">
-                                    <a href="#search" class="btn btn-secondary w-100 page-link">
-                                        <i class="fas fa-search"></i> Іздеу
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Менің посттарым -->
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h5 class="mb-0"><i class="fas fa-file-alt"></i> Менің соңғы посттарым</h5>
-                        </div>
-                        <div class="card-body" id="userPostsList">
-                            <div class="text-center py-4">
-                                <i class="fas fa-newspaper fa-3x text-muted mb-3"></i>
-                                <h5>Сізде әлі посттар жоқ</h5>
-                                <p class="text-muted mb-4">Бірінші пост жариялау үшін төмендегі батырманы басыңыз</p>
-                                <a href="#create-post" class="btn btn-primary page-link">
-                                    <i class="fas fa-plus"></i> Бірінші постты жасау
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Соңғы белсенділік -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="mb-0"><i class="fas fa-history"></i> Соңғы белсенділік</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center py-4">
-                                <i class="fas fa-history fa-3x text-muted mb-3"></i>
-                                <h5>Әлі белсенділік жоқ</h5>
-                                <p class="text-muted">Пост жариялау немесе пікір қалдыру арқылы бастаңыз</p>
                             </div>
                         </div>
                     </div>
@@ -580,96 +624,76 @@
             </div>
         </div>
 
-        <!-- Жаңа пост жасау -->
+        <!-- Пост жасау беті -->
         <div id="create-post" class="page-content" style="display: none;">
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h4 class="mb-0"><i class="fas fa-edit"></i> Жаңа пост жасау</h4>
-                        </div>
-                        <div class="card-body">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="text-center mb-4">
+                                <h3 class="fw-bold">
+                                    <i class="fas fa-edit text-primary me-2"></i>
+                                    <span data-translate="create_post_title">Жаңа пост</span>
+                                </h3>
+                                <p class="text-muted" data-translate="create_post_subtitle">
+                                    Постыңыз барлық пайдаланушыларға көрінеді
+                                </p>
+                            </div>
+                            
                             <form id="createPostForm">
                                 <div class="mb-3">
-                                    <label for="postTitle" class="form-label">
-                                        <i class="fas fa-heading"></i> Пост тақырыбы
+                                    <label class="form-label" data-translate="post_title">
+                                        <i class="fas fa-heading"></i> Тақырып
                                     </label>
-                                    <input type="text" 
-                                           class="form-control" 
-                                           id="postTitle" 
-                                           name="title" 
-                                           placeholder="Постыңыздың тақырыбын енгізіңіз...">
-                                    <div class="invalid-feedback" id="titleError"></div>
+                                    <input type="text" class="form-control" id="postTitle" 
+                                           placeholder="Постыңыздың тақырыбын жазыңыз...">
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="postCategory" class="form-label">
-                                        <i class="fas fa-tags"></i> Санат
+                                    <label class="form-label" data-translate="post_content">
+                                        <i class="fas fa-align-left"></i> Мазмұн
                                     </label>
-                                    <select class="form-select" id="postCategory" name="category">
-                                        <option value="">Санатты таңдаңыз</option>
-                                        <option value="technology">Технология</option>
-                                        <option value="education">Білім</option>
-                                        <option value="sports">Спорт</option>
-                                        <option value="entertainment">Ойын-сауық</option>
-                                        <option value="news">Жаңалықтар</option>
-                                        <option value="other">Басқа</option>
-                                    </select>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="postContent" class="form-label">
-                                        <i class="fas fa-align-left"></i> Мазмұн *
-                                    </label>
-                                    <textarea class="form-control" 
-                                              id="postContent" 
-                                              name="content" 
-                                              rows="8"
-                                              required
-                                              placeholder="Постыңыздың мазмұнын енгізіңіз..."></textarea>
-                                    <div class="invalid-feedback" id="contentError"></div>
-                                    <div class="mt-1 text-end">
-                                        <small id="charCount">0 таңба</small>
+                                    <textarea class="form-control" id="postContent" rows="6" required
+                                              placeholder="Мазмұныңызды жазыңыз..."></textarea>
+                                    <div class="mt-2 d-flex justify-content-between">
+                                        <small class="text-muted" data-translate="post_will_be_public">
+                                            Бұл пост БАРЛЫҚ пайдаланушыларға көрінеді
+                                        </small>
+                                        <small>
+                                            <span id="charCount">0</span> <span data-translate="characters">таңба</span>
+                                        </small>
                                     </div>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="postImage" class="form-label">
-                                        <i class="fas fa-image"></i> Сурет қосу (міндетті емес)
+                                    <label class="form-label" data-translate="add_image">
+                                        <i class="fas fa-image"></i> Сурет қосу
                                     </label>
-                                    <input type="file" class="form-control" id="postImage" name="image" accept="image/*">
-                                    <small class="form-text text-muted">Максимум 5MB, формат: JPG, PNG, GIF</small>
-                                    
+                                    <input type="file" class="form-control" id="postImage" accept="image/*">
                                     <div class="mt-2">
-                                        <img id="imagePreview" src="#" alt="Сурет алдын ала қарау" class="img-fluid rounded" style="display: none; max-height: 200px;">
+                                        <img id="imagePreview" src="#" alt="Сурет" 
+                                             class="img-fluid rounded post-image" style="display: none;">
                                     </div>
                                 </div>
                                 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <a href="#dashboard" class="btn btn-secondary me-md-2 page-link">
-                                        <i class="fas fa-times"></i> Болдырмау
+                                    <a href="#home" class="btn btn-outline-secondary me-md-2 page-link">
+                                        <i class="fas fa-times"></i> <span data-translate="cancel">Болдырмау</span>
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="fas fa-paper-plane"></i> Жариялау
+                                        <i class="fas fa-paper-plane"></i> <span data-translate="publish_post">Жариялау</span>
                                     </button>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                    
-                    <!-- Кеңес карточкасы -->
-                    <div class="card mt-4">
-                        <div class="card-header bg-info text-white">
-                            <h6 class="mb-0"><i class="fas fa-lightbulb"></i> Пост жазу бойынша кеңестер</h6>
-                        </div>
-                        <div class="card-body">
-                            <ul class="mb-0">
-                                <li>Нақты және түсінікті тақырып қойыңыз</li>
-                                <li>Мәтінді бөліктерге бөліп, оқуды жеңілдетіңіз</li>
-                                <li>Суреттер қосу пікірлерді көбейтеді</li>
-                                <li>Өзіңіздің тәжірибелеріңізбен бөлісіңіз</li>
-                                <li>Баска адамдарға сұрақ қойыңыз</li>
-                            </ul>
+                            
+                            <div class="alert alert-info mt-4">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong data-translate="important">Маңызды:</strong>
+                                <span data-translate="post_visibility_info">
+                                    Сіздің посттарыңыз nartai.netlify.app сайтындағы барлық пайдаланушыларға көрінеді.
+                                    Басқа телефондардан, компьютерлерден де көруге болады.
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -679,58 +703,27 @@
         <!-- Барлық посттар -->
         <div id="posts" class="page-content" style="display: none;">
             <div class="row">
-                <div class="col-md-8">
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
+                <div class="col-md-12">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 py-3">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h4 class="mb-0"><i class="fas fa-newspaper"></i> Барлық посттар</h4>
-                                <span class="badge bg-light text-primary" id="totalPostsCount">
-                                    0 пост
-                                </span>
+                                <h4 class="mb-0">
+                                    <i class="fas fa-newspaper text-primary me-2"></i>
+                                    <span data-translate="all_posts">Барлық посттар</span>
+                                    <span class="badge bg-primary ms-2" id="allPostsCount">0</span>
+                                </h4>
+                                <div class="d-flex align-items-center">
+                                    <input type="text" class="form-control me-2" id="searchPosts" 
+                                           placeholder="Посттарды іздеу..." style="width: 200px;">
+                                    <button class="btn btn-outline-primary" id="refreshPosts">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body" id="allPostsList">
-                            <!-- Барлық посттар осында көрсетіледі -->
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-md-4">
-                    <!-- Танымал посттар -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="mb-0"><i class="fas fa-fire"></i> Танымал посттар</h5>
-                        </div>
-                        <div class="card-body" id="popularPostsList">
-                            <!-- Танымал посттар -->
-                        </div>
-                    </div>
-                    
-                    <!-- Санаттар -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-info text-white">
-                            <h5 class="mb-0"><i class="fas fa-tags"></i> Санаттар</h5>
-                        </div>
                         <div class="card-body">
-                            <div class="d-flex flex-wrap gap-2">
-                                <span class="badge bg-primary p-2">Технология</span>
-                                <span class="badge bg-success p-2">Білім</span>
-                                <span class="badge bg-warning p-2">Спорт</span>
-                                <span class="badge bg-danger p-2">Ойын-сауық</span>
-                                <span class="badge bg-secondary p-2">Жаңалықтар</span>
-                                <span class="badge bg-dark p-2">Басқа</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Әрекет кнопкалары -->
-                    <div class="card">
-                        <div class="card-header bg-warning text-dark">
-                            <h5 class="mb-0"><i class="fas fa-bullhorn"></i> Әрекеттер</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-grid gap-2" id="postsActions">
-                                <!-- Кнопкалар осында көрсетіледі -->
+                            <div id="allPostsList">
+                                <!-- Барлық посттар осында көрсетіледі -->
                             </div>
                         </div>
                     </div>
@@ -742,271 +735,133 @@
         <div id="profile" class="page-content" style="display: none;">
             <div class="row">
                 <div class="col-md-4">
-                    <!-- Профиль карточкасы -->
-                    <div class="card mb-4">
-                        <div class="card-body text-center">
+                    <div class="card border-0 shadow-sm">
+                        <div class="profile-header">
                             <img id="profileAvatar" 
-                                 src="https://ui-avatars.com/api/?name=Пайдаланушы&background=0D8ABC&color=fff" 
-                                 alt="Пайдаланушы" 
-                                 class="rounded-circle mb-3" 
-                                 width="150" 
-                                 height="150"
-                                 style="object-fit: cover;">
-                            
-                            <h3 id="profileName">Пайдаланушы</h3>
-                            <p class="text-muted" id="profileUsername">@username</p>
-                            <p id="profileBio">Өзі туралы ақпарат</p>
-                            
-                            <div class="row mt-4">
-                                <div class="col-6">
-                                    <h5 id="profilePostsCount">0</h5>
-                                    <small class="text-muted">Посттар</small>
-                                </div>
-                                <div class="col-6">
-                                    <h5 id="profileCommentsCount">0</h5>
-                                    <small class="text-muted">Пікірлер</small>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-4" id="profileActions">
-                                <!-- Профиль әрекеттері -->
+                                 src="https://ui-avatars.com/api/?name=Қонақ&background=fff&color=4a6fa5" 
+                                 class="rounded-circle profile-avatar mb-3">
+                            <h3 id="profileName" class="text-white">Қонақ</h3>
+                            <p class="text-white mb-0" id="profileUsername">@username</p>
+                            <div class="mt-3">
+                                <span class="badge bg-light text-primary me-2" id="profilePostsCount">0 пост</span>
+                                <span class="badge bg-light text-primary" id="profileLikesCount">0 лайк</span>
                             </div>
                         </div>
-                        <div class="card-footer text-center">
-                            <small class="text-muted">
-                                <i class="fas fa-calendar-alt"></i> Тіркелген: 
-                                <span id="profileJoinedDate">Бүгін</span>
-                            </small>
+                        <div class="card-body text-center">
+                            <p id="profileBio" class="text-muted" data-translate="no_bio">
+                                Өзі туралы ақпарат жоқ
+                            </p>
+                            <div class="mt-4">
+                                <button class="btn btn-outline-primary me-2" id="editProfileBtn">
+                                    <i class="fas fa-edit"></i> <span data-translate="edit_profile">Профильді өңдеу</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="col-md-8">
-                    <!-- Профильді өңдеу кнопкасы -->
-                    <div class="card mb-4" id="profileEditCard" style="display: none;">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="mb-0">Сіздің белсенділігіңіз</h5>
-                                <a href="#create-post" class="btn btn-sm btn-primary page-link">
-                                    <i class="fas fa-plus"></i> Жаңа пост
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Посттар -->
-                    <div class="card">
-                        <div class="card-header">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-white border-0 py-3">
                             <h5 class="mb-0">
-                                <i class="fas fa-newspaper"></i> Посттар
-                                <span class="badge bg-primary rounded-pill" id="profilePostsBadge">0</span>
+                                <i class="fas fa-history text-primary me-2"></i>
+                                <span data-translate="my_posts">Менің посттарым</span>
+                                <span class="badge bg-primary rounded-pill ms-2" id="myPostsCount">0</span>
                             </h5>
                         </div>
-                        <div class="card-body" id="profilePostsList">
-                            <!-- Профиль посттары -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Профильді өңдеу -->
-        <div id="edit-profile" class="page-content" style="display: none;">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h4 class="mb-0"><i class="fas fa-user-edit"></i> Профильді өңдеу</h4>
-                        </div>
                         <div class="card-body">
-                            <form id="editProfileForm">
-                                <div class="row">
-                                    <div class="col-md-4 text-center mb-4">
-                                        <div class="mb-3">
-                                            <img id="editAvatarPreview" 
-                                                 src="https://ui-avatars.com/api/?name=Пайдаланушы&background=0D8ABC&color=fff" 
-                                                 alt="Аватар" 
-                                                 class="rounded-circle img-thumbnail" 
-                                                 width="200" 
-                                                 height="200"
-                                                 style="object-fit: cover;">
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <label for="editAvatar" class="btn btn-outline-primary">
-                                                <i class="fas fa-camera"></i> Суретті өзгерту
-                                            </label>
-                                            <input type="file" 
-                                                   class="form-control d-none" 
-                                                   id="editAvatar" 
-                                                   name="avatar" 
-                                                   accept="image/*">
-                                        </div>
-                                        
-                                        <small class="text-muted">Жақсы көрінетін суретті жүктеңіз</small>
-                                    </div>
-                                    
-                                    <div class="col-md-8">
-                                        <div class="mb-3">
-                                            <label for="editUsername" class="form-label">
-                                                <i class="fas fa-user"></i> Пайдаланушы аты
-                                            </label>
-                                            <input type="text" 
-                                                   class="form-control" 
-                                                   id="editUsername" 
-                                                   disabled>
-                                            <small class="form-text text-muted">Пайдаланушы атын өзгерту мүмкін емес</small>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <label for="editEmail" class="form-label">
-                                                <i class="fas fa-envelope"></i> Электрондық пошта
-                                            </label>
-                                            <input type="email" 
-                                                   class="form-control" 
-                                                   id="editEmail" 
-                                                   disabled>
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <label for="editFullName" class="form-label">
-                                                <i class="fas fa-id-card"></i> Толық аты
-                                            </label>
-                                            <input type="text" 
-                                                   class="form-control" 
-                                                   id="editFullName" 
-                                                   name="full_name" 
-                                                   placeholder="Толық атыңызды енгізіңіз...">
-                                        </div>
-                                        
-                                        <div class="mb-3">
-                                            <label for="editBio" class="form-label">
-                                                <i class="fas fa-info-circle"></i> Өзі туралы
-                                            </label>
-                                            <textarea class="form-control" 
-                                                      id="editBio" 
-                                                      name="bio" 
-                                                      rows="4"
-                                                      placeholder="Өзіңіз туралы қысқаша ақпарат..."></textarea>
-                                            <small class="form-text text-muted">Өзіңіз туралы қысқаша сипаттама жазыңыз</small>
-                                        </div>
-                                        
-                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-                                            <a href="#profile" class="btn btn-secondary me-md-2 page-link">
-                                                <i class="fas fa-times"></i> Болдырмау
-                                            </a>
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fas fa-save"></i> Өзгерістерді сақтау
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    
-                    <!-- Қауіпсіздік бөлімі -->
-                    <div class="card mt-4">
-                        <div class="card-header bg-warning text-dark">
-                            <h5 class="mb-0"><i class="fas fa-shield-alt"></i> Қауіпсіздік</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-grid gap-2">
-                                <a href="#" class="btn btn-outline-warning text-start" id="changePasswordBtn">
-                                    <i class="fas fa-key"></i> Құпиясөзді өзгерту
-                                </a>
-                                <a href="#" class="btn btn-outline-danger text-start" id="deleteAccountBtn">
-                                    <i class="fas fa-trash"></i> Аккаунтты жою
-                                </a>
+                            <div id="profilePostsList">
+                                <!-- Пайдаланушы посттары -->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Іздеу -->
-        <div id="search" class="page-content" style="display: none;">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h4 class="mb-0">
-                                <i class="fas fa-search"></i> Іздеу нәтижелері
-                            </h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-4">
-                                <form id="searchPageForm" class="input-group">
-                                    <input type="text" class="form-control" id="searchPageInput" placeholder="Іздеу сөзін енгізіңіз..." required>
-                                    <button class="btn btn-primary" type="submit">
-                                        <i class="fas fa-search"></i> Іздеу
-                                    </button>
-                                </form>
-                            </div>
-                            
-                            <div id="searchResults">
-                                <div class="text-center py-5">
-                                    <i class="fas fa-search fa-4x text-muted mb-3"></i>
-                                    <h4>Іздеу сөзін енгізіңіз</h4>
-                                    <p class="text-muted">Посттар мен пайдаланушыларды іздеу үшін жоғарыдағы форманы пайдаланыңыз</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
+    </div>
 
     <!-- Футер -->
-    <footer class="bg-dark text-white py-4 mt-5">
+    <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <h5>Nartai</h5>
-                    <p>Сәлем сайтты жасаган Нуртаев Нартай бүл сайтын толық версия емес жақын арада толық түрі жасалынады</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Байланыс</h5>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-envelope me-2"></i> nurtaqnartai@gamil.com</li>
-                        <li><i class="fas fa-phone me-2"></i> +7 (747) 566-46-05</li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5>Әлеуметтік желілер</h5>
-                    <div class="social-links">
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-2x"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-2x"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-2x"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-telegram fa-2x"></i></a>
+                <div class="col-md-6">
+                    <h5 class="fw-bold">NARTAI</h5>
+                    <p class="text-muted" data-translate="footer_description">
+                        Барлық пайдаланушыларға ашық әлеуметтік платформа. Сіздің посттарыңыз барлыққа көрінеді.
+                    </p>
+                    <div class="mt-3">
+                        <a href="#" class="text-decoration-none me-3">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="text-decoration-none me-3">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-decoration-none">
+                            <i class="fab fa-youtube"></i>
+                        </a>
                     </div>
                 </div>
-            </div>
-            <hr class="bg-light">
-            <div class="text-center">
-                <p>&copy; 2026 Nartai. Барлық құқықтар қорғалған.</p>
+                <div class="col-md-6 text-md-end">
+                    <h6 class="fw-bold mb-3">https://nartai.netlify.app/</h6>
+                    <p class="text-muted mb-0" data-translate="copyright">
+                        &copy; 2024 Nartai. Барлық құқықтар қорғалған.
+                    </p>
+                    <p class="text-muted">
+                        <small data-translate="realtime_platform">Нақты уақытта жұмыс істейтін платформа</small>
+                    </p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Terms Modal -->
-    <div class="modal fade" id="termsModal" tabindex="-1">
+    <!-- Пост модальды терезесі -->
+    <div class="modal fade" id="postModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="postModalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="postModalBody">
+                    <!-- Пост мазмұны -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Профиль өңдеу модальды терезесі -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Пайдалану шарттары</h5>
+                    <h5 class="modal-title" data-translate="edit_profile">Профильді өңдеу</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <p>1. Өзіңіздің пікірлеріңізге жауапкершілік таңыңыз.</p>
-                    <p>2. Баска адамдардың құққықтарын құрметтеңіз.</p>
-                    <p>3. Теріс мазмұнды жарияламаңыз.</p>
-                    <p>4. Өзіңіздің акпаратыңыздың қауіпсіздігін қамтамасыз етіңіз.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Жабу</button>
+                    <form id="editProfileForm">
+                        <div class="mb-3 text-center">
+                            <img id="editAvatarPreview" 
+                                 src="https://ui-avatars.com/api/?name=Қонақ&background=4a6fa5&color=fff" 
+                                 class="rounded-circle mb-3" width="100" height="100">
+                            <input type="file" class="form-control" id="editAvatar" accept="image/*" style="display: none;">
+                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('editAvatar').click()">
+                                <i class="fas fa-camera"></i> Суретті өзгерту
+                            </button>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" data-translate="full_name">Толық аты</label>
+                            <input type="text" class="form-control" id="editFullName">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" data-translate="bio">Өзі туралы</label>
+                            <textarea class="form-control" id="editBio" rows="3"></textarea>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> <span data-translate="save_changes">Өзгерістерді сақтау</span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -1017,215 +872,379 @@
     
     <!-- Негізгі JavaScript -->
     <script>
-        // ЖЕКЕ БАЗАСЫ - localStorage пайдаланамыз
-        class SocialPlatform {
+        // ТІЛ АУДАРУЛАРЫ
+        const translations = {
+            kk: {
+                home: "Басты бет",
+                posts: "Барлық посттар",
+                new_post: "Пост жасау",
+                language: "Қаз",
+                login: "Кіру",
+                register: "Тіркелу",
+                my_profile: "Профиль",
+                create_post: "Пост жасау",
+                logout: "Шығу",
+                site_description: "nartai.netlify.app - Сіздің посттарыңыз барлық пайдаланушыларға, барлық құрылғыларға көрінеді!",
+                create_first_post: "Бірінші постыңызды жасаңыз",
+                view_posts: "Посттарды көру",
+                latest_posts: "Жаңа посттар",
+                quick_post: "Жылдам пост жасау",
+                post_visible_to_all: "Пост барлық пайдаланушыларға көрінеді",
+                publish: "Жариялау",
+                realtime_stats: "Нақты уақыт статистикасы",
+                online_users: "Онлайн",
+                total_posts: "Посттар",
+                today_posts: "Бүгін",
+                total_likes: "Лайктар",
+                recent_users: "Жаңа пайдаланушылар",
+                important_info: "Маңызды ақпарат",
+                info_title: "ЕСКЕРТУ!",
+                info_content: "Бұл платформадағы барлық посттар БАРЛЫҚ пайдаланушыларға көрінеді. Сіздің посттарыңыз басқа телефондарда, компьютерлерде де көрінеді.",
+                register_title: "Тіркелу",
+                register_subtitle: "Nartai платформасына қосылыңыз",
+                username: "Пайдаланушы аты",
+                username_hint: "Кемінде 3 таңба",
+                email: "Электрондық пошта",
+                password: "Құпиясөз",
+                confirm_password: "Құпиясөзді растау",
+                agree_terms: "Мен шарттармен келісемін",
+                register_button: "Тіркелу",
+                already_have_account: "Аккаунтыңыз бар ма?",
+                login_title: "Кіру",
+                login_subtitle: "Nartai платформасына кіріңіз",
+                forgot_password: "Құпиясөзді ұмыттым?",
+                remember_me: "Есте сақтау",
+                login_button: "Кіру",
+                no_account: "Аккаунтыңыз жоқ па?",
+                create_post_title: "Жаңа пост",
+                create_post_subtitle: "Постыңыз барлық пайдаланушыларға көрінеді",
+                post_title: "Тақырып",
+                post_content: "Мазмұн",
+                post_will_be_public: "Бұл пост БАРЛЫҚ пайдаланушыларға көрінеді",
+                characters: "таңба",
+                add_image: "Сурет қосу",
+                cancel: "Болдырмау",
+                publish_post: "Жариялау",
+                important: "Маңызды:",
+                post_visibility_info: "Сіздің посттарыңыз nartai.netlify.app сайтындағы барлық пайдаланушыларға көрінеді. Басқа телефондардан, компьютерлерден де көруге болады.",
+                all_posts: "Барлық посттар",
+                no_bio: "Өзі туралы ақпарат жоқ",
+                edit_profile: "Профильді өңдеу",
+                my_posts: "Менің посттарым",
+                footer_description: "Барлық пайдаланушыларға ашық әлеуметтік платформа. Сіздің посттарыңыз барлыққа көрінеді.",
+                copyright: "© 2024 Nartai. Барлық құқықтар қорғалған.",
+                realtime_platform: "Нақты уақытта жұмыс істейтін платформа",
+                full_name: "Толық аты",
+                bio: "Өзі туралы",
+                save_changes: "Өзгерістерді сақтау",
+                like: "Лайк",
+                comment: "Пікір",
+                share: "Бөлісу",
+                views: "көрді",
+                posted_on: "Жарияланды",
+                post_by: "Автор",
+                no_posts: "Әлі посттар жоқ",
+                be_first: "Бірінші болыңыз!",
+                loading: "Жүктелуде...",
+                error: "Қате пайда болды",
+                success: "Сәтті!",
+                post_published: "Пост жарияланды!",
+                login_success: "Кіру сәтті!",
+                register_success: "Тіркелу сәтті!",
+                logout_success: "Шығу сәтті!"
+            },
+            ru: {
+                home: "Главная",
+                posts: "Все посты",
+                new_post: "Создать пост",
+                language: "Рус",
+                login: "Вход",
+                register: "Регистрация",
+                my_profile: "Профиль",
+                create_post: "Создать пост",
+                logout: "Выход",
+                site_description: "nartai.netlify.app - Ваши посты видны всем пользователям на всех устройствах!",
+                create_first_post: "Создайте первый пост",
+                view_posts: "Смотреть посты",
+                latest_posts: "Новые посты",
+                quick_post: "Быстрый пост",
+                post_visible_to_all: "Пост виден всем пользователям",
+                publish: "Опубликовать",
+                realtime_stats: "Статистика в реальном времени",
+                online_users: "Онлайн",
+                total_posts: "Посты",
+                today_posts: "Сегодня",
+                total_likes: "Лайки",
+                recent_users: "Новые пользователи",
+                important_info: "Важная информация",
+                info_title: "ВНИМАНИЕ!",
+                info_content: "Все посты на этой платформе видны ВСЕМ пользователям. Ваши посты видны на других телефонах, компьютерах.",
+                register_title: "Регистрация",
+                register_subtitle: "Присоединяйтесь к платформе Nartai",
+                username: "Имя пользователя",
+                username_hint: "Минимум 3 символа",
+                email: "Электронная почта",
+                password: "Пароль",
+                confirm_password: "Подтвердите пароль",
+                agree_terms: "Я согласен с условиями",
+                register_button: "Зарегистрироваться",
+                already_have_account: "Уже есть аккаунт?",
+                login_title: "Вход",
+                login_subtitle: "Войдите в платформу Nartai",
+                forgot_password: "Забыли пароль?",
+                remember_me: "Запомнить меня",
+                login_button: "Войти",
+                no_account: "Нет аккаунта?",
+                create_post_title: "Новый пост",
+                create_post_subtitle: "Ваш пост будет виден всем пользователям",
+                post_title: "Заголовок",
+                post_content: "Содержание",
+                post_will_be_public: "Этот пост будет виден ВСЕМ пользователям",
+                characters: "символов",
+                add_image: "Добавить изображение",
+                cancel: "Отмена",
+                publish_post: "Опубликовать",
+                important: "Важно:",
+                post_visibility_info: "Ваши посты видны всем пользователям на сайте nartai.netlify.app. Их можно видеть с других телефонов, компьютеров.",
+                all_posts: "Все посты",
+                no_bio: "Информация отсутствует",
+                edit_profile: "Редактировать профиль",
+                my_posts: "Мои посты",
+                footer_description: "Открытая социальная платформа для всех пользователей. Ваши посты видны всем.",
+                copyright: "© 2024 Nartai. Все права защищены.",
+                realtime_platform: "Платформа работает в реальном времени",
+                full_name: "Полное имя",
+                bio: "О себе",
+                save_changes: "Сохранить изменения",
+                like: "Лайк",
+                comment: "Комментарий",
+                share: "Поделиться",
+                views: "просмотров",
+                posted_on: "Опубликовано",
+                post_by: "Автор",
+                no_posts: "Пока нет постов",
+                be_first: "Будьте первым!",
+                loading: "Загрузка...",
+                error: "Произошла ошибка",
+                success: "Успешно!",
+                post_published: "Пост опубликован!",
+                login_success: "Вход выполнен!",
+                register_success: "Регистрация успешна!",
+                logout_success: "Выход выполнен!"
+            }
+        };
+
+        // NARTAI ПЛАТФОРМАСЫ
+        class NartaiPlatform {
             constructor() {
-                this.users = JSON.parse(localStorage.getItem('social_users')) || this.getDefaultUsers();
-                this.posts = JSON.parse(localStorage.getItem('social_posts')) || this.getDefaultPosts();
-                this.currentUser = JSON.parse(localStorage.getItem('social_current_user')) || null;
+                this.currentLanguage = localStorage.getItem('nartai_language') || 'kk';
+                this.users = JSON.parse(localStorage.getItem('nartai_users')) || this.getDefaultUsers();
+                this.posts = JSON.parse(localStorage.getItem('nartai_posts')) || this.getDefaultPosts();
+                this.currentUser = JSON.parse(localStorage.getItem('nartai_current_user')) || null;
+                this.onlineUsers = new Set();
+                this.lastUpdateTime = new Date();
                 
                 this.init();
+                this.startRealtimeUpdates();
             }
             
             getDefaultUsers() {
                 return [
                     {
                         id: 1,
-                        username: 'admin',
-                        email: 'admin@example.com',
+                        username: 'nartai_admin',
+                        email: 'admin@nartai.kz',
                         password: '123456',
-                        full_name: 'Администратор',
-                        bio: 'Бұл сайттың әкімшісі',
-                        avatar_url: 'https://ui-avatars.com/api/?name=Администратор&background=198754&color=fff',
-                        joined_date: '2024-01-01',
+                        full_name: 'Nartai Администраторы',
+                        bio: 'nartai.netlify.app сайтының әкімшісі',
+                        avatar_url: 'https://ui-avatars.com/api/?name=Nartai+Admin&background=4a6fa5&color=fff',
+                        joined_date: new Date().toISOString().split('T')[0],
                         posts_count: 5,
-                        comments_count: 20
+                        likes_count: 120,
+                        is_online: true,
+                        last_seen: new Date().toISOString()
                     },
                     {
                         id: 2,
-                        username: 'user1',
-                        email: 'user1@example.com',
+                        username: 'qazaq_bala',
+                        email: 'user1@nartai.kz',
                         password: '123456',
-                        full_name: 'Бірінші пайдаланушы',
-                        bio: 'Мен бірінші пайдаланушымын',
-                        avatar_url: 'https://ui-avatars.com/api/?name=User1&background=0D8ABC&color=fff',
-                        joined_date: '2024-02-01',
-                        posts_count: 3,
-                        comments_count: 10
+                        full_name: 'Қазақ баласы',
+                        bio: 'Қазақ тілінде жазамын',
+                        avatar_url: 'https://ui-avatars.com/api/?name=Qazaq+Bala&background=166088&color=fff',
+                        joined_date: '2024-01-15',
+                        posts_count: 12,
+                        likes_count: 85,
+                        is_online: true,
+                        last_seen: new Date().toISOString()
                     },
                     {
                         id: 3,
-                        username: 'user2',
-                        email: 'user2@example.com',
+                        username: 'tech_guru',
+                        email: 'user2@nartai.kz',
                         password: '123456',
-                        full_name: 'Екінші пайдаланушы',
-                        bio: 'Мен екінші пайдаланушымын',
-                        avatar_url: 'https://ui-avatars.com/api/?name=User2&background=DC3545&color=fff',
-                        joined_date: '2024-03-01',
-                        posts_count: 2,
-                        comments_count: 5
+                        full_name: 'Технология маманы',
+                        bio: 'Жаңа технологиялар туралы',
+                        avatar_url: 'https://ui-avatars.com/api/?name=Tech+Guru&background=28a745&color=fff',
+                        joined_date: '2024-02-01',
+                        posts_count: 8,
+                        likes_count: 65,
+                        is_online: false,
+                        last_seen: '2024-03-10T10:30:00'
                     }
                 ];
             }
             
             getDefaultPosts() {
+                const today = new Date();
+                const yesterday = new Date(today);
+                yesterday.setDate(yesterday.getDate() - 1);
+                
                 return [
                     {
                         id: 1,
                         user_id: 1,
-                        username: 'admin',
-                        title: 'Қош келдіңіз!',
-                        content: 'Бұл сайтқа қош келдіңіздер! Біздің жаңа әлеуметтік платформаға қош келдіңіз. Мұнда сіз өз пікірлеріңізді бөлісе аласыз, басқа адамдармен сөйлесе аласыз және жаңа достар таба аласыз.',
-                        category: 'news',
+                        username: 'nartai_admin',
+                        title: 'Nartai платформасына қош келдіңіз!',
+                        content: 'Бұл nartai.netlify.app сайтына қош келдіңіз! 👋\n\nБұл платформада сіздің барлық посттарыңыз БАРЛЫҚ пайдаланушыларға көрінеді. Басқа телефондардан, компьютерлерден де көруге болады!\n\nПост жариялап, өз пікірлеріңізді бөлісіңіз!',
                         image_url: '',
-                        likes: 25,
-                        comments: 10,
-                        created_at: '2024-01-15 10:30:00',
-                        avatar_url: 'https://ui-avatars.com/api/?name=Администратор&background=198754&color=fff'
+                        likes: 45,
+                        comments: 12,
+                        views: 150,
+                        created_at: today.toISOString().replace('T', ' ').substring(0, 19),
+                        is_public: true,
+                        avatar_url: 'https://ui-avatars.com/api/?name=Nartai+Admin&background=4a6fa5&color=fff'
                     },
                     {
                         id: 2,
                         user_id: 2,
-                        username: 'user1',
-                        title: 'Бірінші пост',
-                        content: 'Бұл менің бірінші постым. Өте қуаныштымын, бұл платформаға қосылғаныма. Бүгін тамаша күн!',
-                        category: 'other',
+                        username: 'qazaq_bala',
+                        title: 'Бірінші постым!',
+                        content: 'Сәлем, Nartai қауымдастығы! 🎉\n\nМен бүгін бұл платформаға қосылдым. Өте қуаныштымын!\n\nМенің постым басқа адамдарға көрінетініне сенімдімін, себебі бұл платформада барлық посттар барлыққа ашық!',
                         image_url: '',
-                        likes: 15,
-                        comments: 5,
-                        created_at: '2024-02-10 14:20:00',
-                        avatar_url: 'https://ui-avatars.com/api/?name=User1&background=0D8ABC&color=fff'
+                        likes: 28,
+                        comments: 8,
+                        views: 95,
+                        created_at: yesterday.toISOString().replace('T', ' ').substring(0, 19),
+                        is_public: true,
+                        avatar_url: 'https://ui-avatars.com/api/?name=Qazaq+Bala&background=166088&color=fff'
                     },
                     {
                         id: 3,
                         user_id: 3,
-                        username: 'user2',
-                        title: 'Жаңа технологиялар',
-                        content: 'Жаңа смартфон шықты ма? Сондай-ақ AI технологиялары қаншалықты жылдам дамып келе жатқанын көрдіңіз бе? Пікірлеріңізді бөлісіңіз.',
-                        category: 'technology',
+                        username: 'tech_guru',
+                        title: 'AI технологияларының дамуы',
+                        content: 'Бүгін AI технологиялары қаншалықты жылдам дамып келе жатқанын талқылайық. \n\nСіздің ойларыңыз қандай? AI болашағы қалай болады?\n\nПікірлеріңізді жазыңыз - олар да барлыққа көрінеді!',
                         image_url: '',
-                        likes: 30,
-                        comments: 12,
-                        created_at: '2024-03-05 09:15:00',
-                        avatar_url: 'https://ui-avatars.com/api/?name=User2&background=DC3545&color=fff'
-                    },
-                    {
-                        id: 4,
-                        user_id: 1,
-                        username: 'admin',
-                        title: 'Білім туралы',
-                        content: 'Білім - бұл өмір бойы жалғасатын процес. Әр күні жаңа нәрсе үйренуге тырысыңыз. Оқу - бұл ең жақсы инвестиция.',
-                        category: 'education',
-                        image_url: '',
-                        likes: 45,
-                        comments: 18,
-                        created_at: '2024-01-20 16:45:00',
-                        avatar_url: 'https://ui-avatars.com/api/?name=Администратор&background=198754&color=fff'
-                    },
-                    {
-                        id: 5,
-                        user_id: 2,
-                        username: 'user1',
-                        title: 'Спорттық жаңалықтар',
-                        content: 'Бүгін футбол ойыны болды. Өте қызықты ойын болды! Сіздер спортты қалай көресіз? Қандай спорт түрлерін ұнатасыз?',
-                        category: 'sports',
-                        image_url: '',
-                        likes: 22,
-                        comments: 8,
-                        created_at: '2024-02-15 20:10:00',
-                        avatar_url: 'https://ui-avatars.com/api/?name=User1&background=0D8ABC&color=fff'
+                        likes: 35,
+                        comments: 15,
+                        views: 120,
+                        created_at: '2024-03-09 14:20:00',
+                        is_public: true,
+                        avatar_url: 'https://ui-avatars.com/api/?name=Tech+Guru&background=28a745&color=fff'
                     }
                 ];
             }
             
             init() {
                 this.saveData();
+                this.loadLanguage();
                 this.updateUI();
                 this.loadPosts();
+                this.updateRealtimeStats();
+                
+                // Онлайн күйін жаңарту
+                if (this.currentUser) {
+                    this.markUserOnline(this.currentUser.id);
+                }
+                
+                // Уақытты жаңарту
+                this.updateLastUpdateTime();
             }
             
             saveData() {
-                localStorage.setItem('social_users', JSON.stringify(this.users));
-                localStorage.setItem('social_posts', JSON.stringify(this.posts));
+                localStorage.setItem('nartai_language', this.currentLanguage);
+                localStorage.setItem('nartai_users', JSON.stringify(this.users));
+                localStorage.setItem('nartai_posts', JSON.stringify(this.posts));
                 if (this.currentUser) {
-                    localStorage.setItem('social_current_user', JSON.stringify(this.currentUser));
+                    localStorage.setItem('nartai_current_user', JSON.stringify(this.currentUser));
                 }
+            }
+            
+            loadLanguage() {
+                this.translatePage();
+                
+                const switcher = document.getElementById('languageSwitcher');
+                if (this.currentLanguage === 'kk') {
+                    switcher.innerHTML = '<span class="flag-icon flag-icon-kz"></span> Қаз';
+                } else {
+                    switcher.innerHTML = '<span class="flag-icon flag-icon-ru"></span> Рус';
+                }
+            }
+            
+            translatePage() {
+                const elements = document.querySelectorAll('[data-translate]');
+                elements.forEach(element => {
+                    const key = element.getAttribute('data-translate');
+                    if (translations[this.currentLanguage] && translations[this.currentLanguage][key]) {
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.placeholder = translations[this.currentLanguage][key];
+                        } else {
+                            element.textContent = translations[this.currentLanguage][key];
+                        }
+                    }
+                });
+            }
+            
+            switchLanguage() {
+                this.currentLanguage = this.currentLanguage === 'kk' ? 'ru' : 'kk';
+                this.saveData();
+                this.loadLanguage();
+                this.loadPosts(); // Посттарды қайта жүктеу
             }
             
             updateUI() {
                 if (this.currentUser) {
-                    document.getElementById('userMenu').style.display = 'block';
-                    document.getElementById('loginMenu').style.display = 'none';
-                    document.getElementById('registerMenu').style.display = 'none';
-                    document.getElementById('usernameDisplay').textContent = this.currentUser.username;
-                    
-                    // Бақылау тақтасын жаңарту
-                    this.updateDashboard();
-                    // Профильді жаңарту
-                    this.updateProfile();
+                    const user = this.users.find(u => u.id === this.currentUser.id);
+                    if (user) {
+                        document.getElementById('loggedInMenu').style.display = 'block';
+                        document.getElementById('guestMenu').style.display = 'none';
+                        
+                        document.getElementById('userAvatar').src = user.avatar_url;
+                        document.getElementById('usernameDisplay').textContent = user.username;
+                        
+                        // Профильді жаңарту
+                        this.updateProfile(user);
+                    }
                 } else {
-                    document.getElementById('userMenu').style.display = 'none';
-                    document.getElementById('loginMenu').style.display = 'block';
-                    document.getElementById('registerMenu').style.display = 'block';
+                    document.getElementById('loggedInMenu').style.display = 'none';
+                    document.getElementById('guestMenu').style.display = 'block';
                 }
             }
             
-            updateDashboard() {
-                if (!this.currentUser) return;
+            updateProfile(user) {
+                document.getElementById('profileAvatar').src = user.avatar_url;
+                document.getElementById('profileName').textContent = user.full_name || user.username;
+                document.getElementById('profileUsername').textContent = '@' + user.username;
+                document.getElementById('profileBio').textContent = user.bio || 
+                    (this.currentLanguage === 'kk' ? 'Өзі туралы ақпарат жоқ' : 'Информация отсутствует');
+                document.getElementById('profilePostsCount').textContent = (user.posts_count || 0) + ' пост';
+                document.getElementById('profileLikesCount').textContent = (user.likes_count || 0) + ' лайк';
                 
-                const user = this.users.find(u => u.id === this.currentUser.id);
-                if (user) {
-                    document.getElementById('dashboardAvatar').src = user.avatar_url;
-                    document.getElementById('dashboardName').textContent = user.full_name || user.username;
-                    document.getElementById('dashboardUsername').textContent = '@' + user.username;
-                    document.getElementById('dashboardEmail').textContent = user.email;
-                    document.getElementById('userPostsCount').textContent = user.posts_count || 0;
-                    document.getElementById('userLikesCount').textContent = '0';
-                    document.getElementById('userCommentsCount').textContent = user.comments_count || 0;
-                    
-                    // Пайдаланушы посттарын көрсету
-                    this.displayUserPosts();
-                }
+                // Пайдаланушы посттарын көрсету
+                this.loadUserPosts(user.id);
             }
             
-            updateProfile() {
-                if (!this.currentUser) return;
-                
-                const user = this.users.find(u => u.id === this.currentUser.id);
-                if (user) {
-                    document.getElementById('profileAvatar').src = user.avatar_url;
-                    document.getElementById('profileName').textContent = user.full_name || user.username;
-                    document.getElementById('profileUsername').textContent = '@' + user.username;
-                    document.getElementById('profileBio').textContent = user.bio || 'Өзі туралы ақпарат жоқ';
-                    document.getElementById('profilePostsCount').textContent = user.posts_count || 0;
-                    document.getElementById('profileCommentsCount').textContent = user.comments_count || 0;
-                    document.getElementById('profileJoinedDate').textContent = user.joined_date || 'Бүгін';
-                    document.getElementById('profilePostsBadge').textContent = user.posts_count || 0;
-                    
-                    // Профиль әрекеттері
-                    const profileActions = document.getElementById('profileActions');
-                    profileActions.innerHTML = `
-                        <a href="#edit-profile" class="btn btn-primary page-link">
-                            <i class="fas fa-edit"></i> Профильді өңдеу
-                        </a>
-                        <a href="#dashboard" class="btn btn-outline-secondary page-link">
-                            <i class="fas fa-tachometer-alt"></i> Бақылау тақтасы
-                        </a>
-                    `;
-                    
-                    document.getElementById('profileEditCard').style.display = 'block';
-                    
-                    // Профиль посттарын көрсету
-                    this.displayProfilePosts();
-                }
-            }
-            
-            // Тіркелу функциясы
-            register(username, email, password, full_name) {
+            register(username, email, password) {
                 // Пайдаланушы бар-жоғын тексеру
                 const existingUser = this.users.find(u => u.username === username || u.email === email);
                 if (existingUser) {
-                    return { success: false, message: 'Пайдаланушы аты немесе электрондық пошта бұрыннан бар' };
+                    return { 
+                        success: false, 
+                        message: this.currentLanguage === 'kk' 
+                            ? 'Пайдаланушы аты немесе электрондық пошта бұрыннан бар' 
+                            : 'Имя пользователя или электронная почта уже существуют' 
+                    };
                 }
                 
                 // Жаңа пайдаланушыны қосу
@@ -1234,295 +1253,304 @@
                     username,
                     email,
                     password,
-                    full_name,
+                    full_name: username,
                     bio: '',
-                    avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=0D8ABC&color=fff`,
+                    avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&background=4a6fa5&color=fff`,
                     joined_date: new Date().toISOString().split('T')[0],
                     posts_count: 0,
-                    comments_count: 0
+                    likes_count: 0,
+                    is_online: true,
+                    last_seen: new Date().toISOString()
                 };
                 
                 this.users.push(newUser);
                 this.saveData();
                 
-                return { success: true, message: 'Тіркелу сәтті аяқталды!' };
+                return { 
+                    success: true, 
+                    message: this.currentLanguage === 'kk' 
+                        ? 'Тіркелу сәтті аяқталды!' 
+                        : 'Регистрация завершена успешно!' 
+                };
             }
             
-            // Кіру функциясы
             login(email, password) {
                 const user = this.users.find(u => u.email === email && u.password === password);
                 
                 if (user) {
-                    this.currentUser = { id: user.id, username: user.username, email: user.email };
+                    this.currentUser = { 
+                        id: user.id, 
+                        username: user.username, 
+                        email: user.email 
+                    };
+                    user.is_online = true;
+                    user.last_seen = new Date().toISOString();
                     this.saveData();
                     this.updateUI();
-                    return { success: true, message: 'Кіру сәтті!' };
+                    this.markUserOnline(user.id);
+                    
+                    return { 
+                        success: true, 
+                        message: this.currentLanguage === 'kk' 
+                            ? 'Кіру сәтті!' 
+                            : 'Вход выполнен успешно!' 
+                    };
                 } else {
-                    return { success: false, message: 'Қате электрондық пошта немесе құпиясөз' };
+                    return { 
+                        success: false, 
+                        message: this.currentLanguage === 'kk' 
+                            ? 'Қате электрондық пошта немесе құпиясөз' 
+                            : 'Неверная электронная почта или пароль' 
+                    };
                 }
             }
             
-            // Шығу функциясы
             logout() {
+                if (this.currentUser) {
+                    const user = this.users.find(u => u.id === this.currentUser.id);
+                    if (user) {
+                        user.is_online = false;
+                        user.last_seen = new Date().toISOString();
+                    }
+                }
+                
                 this.currentUser = null;
-                localStorage.removeItem('social_current_user');
+                localStorage.removeItem('nartai_current_user');
+                this.saveData();
                 this.updateUI();
-                this.showMessage('Сіз жүйеден шықтыңыз', 'success');
+                this.showMessage(this.currentLanguage === 'kk' 
+                    ? 'Сіз жүйеден шықтыңыз' 
+                    : 'Вы вышли из системы', 'success');
                 this.showPage('home');
             }
             
-            // Пост қосу функциясы
-            addPost(title, content, category, image_url = '') {
+            addPost(title, content, imageUrl = '') {
                 if (!this.currentUser) {
-                    return { success: false, message: 'Кіру керек' };
+                    return { 
+                        success: false, 
+                        message: this.currentLanguage === 'kk' 
+                            ? 'Пост жариялау үшін кіру керек' 
+                            : 'Для публикации поста требуется вход' 
+                    };
                 }
                 
                 const user = this.users.find(u => u.id === this.currentUser.id);
-                if (!user) return { success: false, message: 'Пайдаланушы табылмады' };
+                if (!user) return { 
+                    success: false, 
+                    message: this.currentLanguage === 'kk' 
+                        ? 'Пайдаланушы табылмады' 
+                        : 'Пользователь не найден' 
+                };
                 
+                // ПОСТ ӘРҚАШАН БАРЛЫҚҚА АШЫҚ БОЛАДЫ!
                 const newPost = {
-                    id: this.posts.length + 1,
+                    id: Date.now(), // Уникальды ID
                     user_id: this.currentUser.id,
                     username: this.currentUser.username,
-                    title,
-                    content,
-                    category,
-                    image_url,
+                    title: title || '',
+                    content: content,
+                    image_url: imageUrl,
                     likes: 0,
                     comments: 0,
+                    views: 0,
                     created_at: new Date().toISOString().replace('T', ' ').substring(0, 19),
+                    is_public: true, // ӘРҚАШАН TRUE!
                     avatar_url: user.avatar_url
                 };
                 
+                // Алдыңғы жағына қосу (жаңа пост бірінші болады)
                 this.posts.unshift(newPost);
                 user.posts_count = (user.posts_count || 0) + 1;
                 this.saveData();
                 
-                return { success: true, message: 'Пост сәтті жарияланды!', post: newPost };
+                // Нақты уақытта жаңарту
+                this.updateRealtimeStats();
+                
+                return { 
+                    success: true, 
+                    message: this.currentLanguage === 'kk' 
+                        ? 'Пост жарияланды! Барлық пайдаланушылар көре алады.' 
+                        : 'Пост опубликован! Все пользователи могут его видеть.',
+                    post: newPost 
+                };
             }
             
-            // Посттарды жүктеу
             loadPosts() {
                 const postsList = document.getElementById('postsList');
                 const allPostsList = document.getElementById('allPostsList');
-                const popularPostsList = document.getElementById('popularPostsList');
                 
                 if (!postsList) return;
                 
-                // Соңғы 5 постты көрсету
-                const latestPosts = this.posts.slice(0, 5);
+                // Барлық посттар (тек public)
+                const publicPosts = this.posts.filter(post => post.is_public === true);
+                
+                // Соңғы 5 пост
+                const latestPosts = publicPosts.slice(0, 5);
                 
                 if (latestPosts.length > 0) {
                     postsList.innerHTML = latestPosts.map(post => this.createPostHTML(post)).join('');
+                    document.getElementById('realtimePostsCount').textContent = latestPosts.length;
                 } else {
                     postsList.innerHTML = `
                         <div class="text-center py-5">
                             <i class="fas fa-newspaper fa-4x text-muted mb-3"></i>
-                            <h5>Әлі посттар жоқ</h5>
-                            <p class="text-muted">Бірінші болып пост жариялаңыз!</p>
+                            <h5 data-translate="no_posts">Әлі посттар жоқ</h5>
+                            <p class="text-muted" data-translate="be_first">Бірінші болыңыз!</p>
                             ${!this.currentUser ? `
                             <a href="#register" class="btn btn-primary page-link">
-                                <i class="fas fa-user-plus"></i> Тіркеліңіз
+                                <i class="fas fa-user-plus"></i> <span data-translate="register">Тіркелу</span>
                             </a>
                             ` : ''}
                         </div>
                     `;
                 }
                 
-                // Барлық посттар
+                // Барлық посттар беті
                 if (allPostsList) {
-                    allPostsList.innerHTML = this.posts.map(post => this.createPostHTML(post, true)).join('');
-                    document.getElementById('totalPostsCount').textContent = `${this.posts.length} пост`;
-                    
-                    // Кнопкалар
-                    const postsActions = document.getElementById('postsActions');
-                    if (this.currentUser) {
-                        postsActions.innerHTML = `
-                            <a href="#create-post" class="btn btn-primary page-link">
-                                <i class="fas fa-plus"></i> Жаңа пост жасау
-                            </a>
-                            <a href="#dashboard" class="btn btn-outline-primary page-link">
-                                <i class="fas fa-tachometer-alt"></i> Бақылау тақтасы
-                            </a>
-                        `;
-                    } else {
-                        postsActions.innerHTML = `
-                            <a href="#register" class="btn btn-success page-link">
-                                <i class="fas fa-user-plus"></i> Тіркелу
-                            </a>
-                            <a href="#login" class="btn btn-outline-success page-link">
-                                <i class="fas fa-sign-in-alt"></i> Кіру
-                            </a>
-                        `;
-                    }
+                    allPostsList.innerHTML = publicPosts.map(post => this.createPostHTML(post)).join('');
+                    document.getElementById('allPostsCount').textContent = publicPosts.length;
                 }
                 
-                // Танымал посттар (лайк саны бойынша)
-                if (popularPostsList) {
-                    const popularPosts = [...this.posts].sort((a, b) => b.likes - a.likes).slice(0, 3);
-                    popularPostsList.innerHTML = popularPosts.map(post => `
-                        <a href="#post-${post.id}" class="list-group-item list-group-item-action post-link" data-post-id="${post.id}">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">${post.title || 'Тақырыпсыз'}</h6>
-                                <small class="text-muted">
-                                    <i class="fas fa-heart text-danger"></i> ${post.likes || 0}
-                                </small>
-                            </div>
-                            <small class="text-muted">@${post.username}</small>
-                        </a>
-                    `).join('');
-                }
-                
-                // Статистиканы жаңарту
-                document.getElementById('usersCount').textContent = `${this.users.length}+`;
-                document.getElementById('postsCount').textContent = `${this.posts.length}+`;
+                // Жаңа пайдаланушыларды жаңарту
+                this.loadRecentUsers();
             }
             
-            // Пайдаланушы посттарын көрсету
-            displayUserPosts() {
-                const userPostsList = document.getElementById('userPostsList');
-                if (!userPostsList || !this.currentUser) return;
-                
-                const userPosts = this.posts.filter(post => post.user_id === this.currentUser.id);
-                
-                if (userPosts.length > 0) {
-                    userPostsList.innerHTML = `
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Тақырып</th>
-                                        <th>Күні</th>
-                                        <th>Лайктар</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${userPosts.map(post => `
-                                        <tr>
-                                            <td>
-                                                <a href="#post-${post.id}" class="text-decoration-none post-link" data-post-id="${post.id}">
-                                                    ${post.title || 'Тақырыпсыз'}
-                                                </a>
-                                            </td>
-                                            <td>${post.created_at.split(' ')[0]}</td>
-                                            <td>${post.likes || 0}</td>
-                                        </tr>
-                                    `).join('')}
-                                </tbody>
-                            </table>
-                        </div>
-                    `;
-                }
-            }
-            
-            // Профиль посттарын көрсету
-            displayProfilePosts() {
+            loadUserPosts(userId) {
                 const profilePostsList = document.getElementById('profilePostsList');
-                if (!profilePostsList || !this.currentUser) return;
-                
-                const userPosts = this.posts.filter(post => post.user_id === this.currentUser.id);
+                const userPosts = this.posts.filter(post => 
+                    post.user_id === userId && post.is_public === true
+                );
                 
                 if (userPosts.length > 0) {
-                    profilePostsList.innerHTML = `
-                        <div class="list-group list-group-flush">
-                            ${userPosts.map(post => `
-                                <div class="list-group-item">
-                                    <div class="d-flex w-100 justify-content-between mb-2">
-                                        <h6 class="mb-0">
-                                            <a href="#post-${post.id}" class="text-decoration-none post-link" data-post-id="${post.id}">
-                                                ${post.title || 'Тақырыпсыз'}
-                                            </a>
-                                        </h6>
-                                        <small class="text-muted">
-                                            ${post.created_at.split(' ')[0]}
-                                        </small>
-                                    </div>
-                                    
-                                    <p class="mb-2">
-                                        ${post.content.length > 150 ? post.content.substring(0, 150) + '...' : post.content}
-                                    </p>
-                                    
-                                    <div class="d-flex justify-content-between">
-                                        <small class="text-muted">
-                                            <i class="far fa-heart"></i> ${post.likes || 0}
-                                            <i class="far fa-comment ms-2"></i> ${post.comments || 0}
-                                        </small>
-                                        
-                                        <div>
-                                            <a href="#post-${post.id}" class="btn btn-sm btn-outline-primary post-link" data-post-id="${post.id}">
-                                                Толығырақ
-                                            </a>
-                                        </div>
-                                    </div>
+                    profilePostsList.innerHTML = userPosts.map(post => `
+                        <div class="card post-card mb-3">
+                            <div class="card-body">
+                                <h6>${post.title || ''}</h6>
+                                <p class="mb-2">${post.content.length > 100 ? post.content.substring(0, 100) + '...' : post.content}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">
+                                        <i class="far fa-heart"></i> ${post.likes}
+                                        <i class="far fa-comment ms-2"></i> ${post.comments}
+                                        <i class="far fa-eye ms-2"></i> ${post.views}
+                                    </small>
+                                    <small class="text-muted">
+                                        ${this.getTimeAgo(post.created_at)}
+                                    </small>
                                 </div>
-                            `).join('')}
+                            </div>
                         </div>
-                    `;
+                    `).join('');
+                    
+                    document.getElementById('myPostsCount').textContent = userPosts.length;
                 } else {
                     profilePostsList.innerHTML = `
                         <div class="text-center py-5">
                             <i class="fas fa-newspaper fa-4x text-muted mb-3"></i>
-                            <h5>Әлі посттар жоқ</h5>
-                            <p class="text-muted">Бірінші пост жариялау үшін төмендегі батырманы басыңыз</p>
+                            <h5 data-translate="no_posts">Әлі посттар жоқ</h5>
+                            <p class="text-muted">
+                                ${this.currentLanguage === 'kk' 
+                                    ? 'Бірінші пост жариялаңыз' 
+                                    : 'Опубликуйте первый пост'}
+                            </p>
                             <a href="#create-post" class="btn btn-primary page-link">
-                                <i class="fas fa-plus"></i> Бірінші постты жасау
+                                <i class="fas fa-plus"></i> <span data-translate="new_post">Пост жасау</span>
                             </a>
                         </div>
                     `;
+                    document.getElementById('myPostsCount').textContent = '0';
                 }
             }
             
-            // Пост HTML құру
-            createPostHTML(post, showAll = false) {
+            loadRecentUsers() {
+                const recentUsersList = document.getElementById('recentUsersList');
+                const recentUsers = [...this.users]
+                    .sort((a, b) => new Date(b.joined_date) - new Date(a.joined_date))
+                    .slice(0, 4);
+                
+                recentUsersList.innerHTML = recentUsers.map(user => `
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="position-relative">
+                            <img src="${user.avatar_url}" 
+                                 alt="${user.username}" 
+                                 class="rounded-circle me-3" 
+                                 width="45" 
+                                 height="45">
+                            ${user.is_online ? `
+                            <span class="position-absolute bottom-0 end-0 p-1 bg-success border border-white rounded-circle">
+                                <span class="visually-hidden">Онлайн</span>
+                            </span>
+                            ` : ''}
+                        </div>
+                        <div>
+                            <h6 class="mb-0">${user.username}</h6>
+                            <small class="text-muted">${user.joined_date}</small>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            createPostHTML(post) {
                 const timeAgo = this.getTimeAgo(post.created_at);
                 
                 return `
-                    <div class="post-item mb-4 pb-3 border-bottom">
-                        <div class="d-flex align-items-center mb-2">
-                            <img src="${post.avatar_url}" 
-                                 alt="${post.username}" 
-                                 class="rounded-circle me-2" 
-                                 width="40" 
-                                 height="40">
-                            <div>
-                                <h6 class="mb-0">${post.username}</h6>
+                    <div class="post-card fade-in">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <img src="${post.avatar_url}" 
+                                     alt="${post.username}" 
+                                     class="rounded-circle user-avatar me-3">
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0 fw-bold">${post.username}</h6>
+                                    <small class="text-muted">
+                                        <i class="far fa-clock"></i> ${timeAgo}
+                                    </small>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary" onclick="nartai.showPostDetail(${post.id})">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                            
+                            ${post.title ? `<h5 class="mb-3">${post.title}</h5>` : ''}
+                            
+                            <p class="mb-3">${post.content}</p>
+                            
+                            ${post.image_url ? `
+                            <div class="mb-3">
+                                <img src="${post.image_url}" alt="Post image" class="post-image">
+                            </div>
+                            ` : ''}
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm btn-outline-danger like-btn" data-post-id="${post.id}">
+                                        <i class="far fa-heart"></i>
+                                        <span class="like-count">${post.likes}</span>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="nartai.showPostDetail(${post.id})">
+                                        <i class="far fa-comment"></i>
+                                        <span>${post.comments}</span>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-share"></i>
+                                    </button>
+                                </div>
                                 <small class="text-muted">
-                                    <i class="far fa-clock"></i> ${timeAgo}
-                                    ${post.category ? `<span class="badge bg-secondary ms-2">${post.category}</span>` : ''}
+                                    <i class="far fa-eye"></i> ${post.views}
                                 </small>
                             </div>
-                        </div>
-                        
-                        <h5 class="mt-2">
-                            <a href="#post-${post.id}" class="text-decoration-none post-link" data-post-id="${post.id}">
-                                ${post.title || 'Тақырыпсыз'}
-                            </a>
-                        </h5>
-                        
-                        <p class="mb-2">
-                            ${showAll ? post.content : (post.content.length > 200 ? post.content.substring(0, 200) + '...' : post.content)}
-                        </p>
-                        
-                        ${post.image_url ? `<img src="${post.image_url}" alt="Post image" class="img-fluid rounded mb-2" style="max-height: 300px;">` : ''}
-                        
-                        <div class="d-flex justify-content-between text-muted">
-                            <small>
-                                <i class="far fa-heart"></i> ${post.likes || 0} лайк
-                            </small>
-                            <small>
-                                <i class="far fa-comment"></i> ${post.comments || 0} пікір
-                            </small>
-                            <small>
-                                <a href="#post-${post.id}" class="text-decoration-none post-link" data-post-id="${post.id}">
-                                    <i class="fas fa-external-link-alt"></i> Толығырақ
-                                </a>
-                            </small>
+                            
+                            <div class="mt-3 pt-3 border-top">
+                                <small class="text-muted">
+                                    <i class="fas fa-globe"></i>
+                                    <span data-translate="post_by">Автор:</span> ${post.username}
+                                    | <span data-translate="posted_on">Жарияланды:</span> ${post.created_at.split(' ')[0]}
+                                </small>
+                            </div>
                         </div>
                     </div>
                 `;
             }
             
-            // Уақыт аралығын есептеу
             getTimeAgo(dateString) {
                 const postDate = new Date(dateString);
                 const now = new Date();
@@ -1531,26 +1559,35 @@
                 const diffHours = Math.floor(diffMs / 3600000);
                 const diffDays = Math.floor(diffMs / 86400000);
                 
-                if (diffMins < 1) return 'жаңа';
-                if (diffMins < 60) return `${diffMins} мин бұрын`;
-                if (diffHours < 24) return `${diffHours} сағ бұрын`;
-                if (diffDays < 7) return `${diffDays} күн бұрын`;
-                return postDate.toLocaleDateString('kk-KZ');
+                if (this.currentLanguage === 'kk') {
+                    if (diffMins < 1) return 'жаңағы';
+                    if (diffMins < 60) return `${diffMins} мин бұрын`;
+                    if (diffHours < 24) return `${diffHours} сағ бұрын`;
+                    if (diffDays < 7) return `${diffDays} күн бұрын`;
+                    return postDate.toLocaleDateString('kk-KZ');
+                } else {
+                    if (diffMins < 1) return 'только что';
+                    if (diffMins < 60) return `${diffMins} мин назад`;
+                    if (diffHours < 24) return `${diffHours} ч назад`;
+                    if (diffDays < 7) return `${diffDays} дн назад`;
+                    return postDate.toLocaleDateString('ru-RU');
+                }
             }
             
-            // Хабарлама көрсету
             showMessage(message, type = 'success') {
                 const messageContainer = document.getElementById('messageContainer');
                 const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
                 
                 messageContainer.innerHTML = `
-                    <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
-                        ${message}
+                    <div class="alert ${alertClass} alert-dismissible fade show slide-down" role="alert">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>
+                            <div>${message}</div>
+                        </div>
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 `;
                 
-                // 5 секундтан кейін хабарламаны жою
                 setTimeout(() => {
                     const alert = messageContainer.querySelector('.alert');
                     if (alert) {
@@ -1560,7 +1597,6 @@
                 }, 5000);
             }
             
-            // Бетті көрсету
             showPage(pageId) {
                 // Барлық беттерді жасыру
                 document.querySelectorAll('.page-content').forEach(page => {
@@ -1575,11 +1611,13 @@
                     // Навигацияны жаңарту
                     document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
                         link.classList.remove('active');
+                        link.parentElement.classList.remove('active');
                     });
                     
                     const activeLink = document.querySelector(`.navbar-nav .nav-link[href="#${pageId}"]`);
                     if (activeLink) {
                         activeLink.classList.add('active');
+                        activeLink.parentElement.classList.add('active');
                     }
                     
                     // Беттің үстіне көтерілу
@@ -1588,70 +1626,251 @@
                     // Посттарды жаңарту
                     if (pageId === 'home' || pageId === 'posts') {
                         this.loadPosts();
-                    }
-                    
-                    // Бақылау тақтасын жаңарту
-                    if (pageId === 'dashboard' && this.currentUser) {
-                        this.updateDashboard();
+                        this.updateRealtimeStats();
                     }
                     
                     // Профильді жаңарту
                     if (pageId === 'profile' && this.currentUser) {
-                        this.updateProfile();
-                    }
-                    
-                    // Профильді өңдеу бетін жаңарту
-                    if (pageId === 'edit-profile' && this.currentUser) {
                         const user = this.users.find(u => u.id === this.currentUser.id);
                         if (user) {
-                            document.getElementById('editUsername').value = user.username;
-                            document.getElementById('editEmail').value = user.email;
-                            document.getElementById('editFullName').value = user.full_name || '';
-                            document.getElementById('editBio').value = user.bio || '';
-                            document.getElementById('editAvatarPreview').src = user.avatar_url;
+                            this.updateProfile(user);
                         }
                     }
+                    
+                    // Анимация
+                    targetPage.classList.add('fade-in');
                 }
             }
             
-            // Іздеу функциясы
-            search(query) {
-                if (!query || query.trim().length < 2) {
-                    return { posts: [], users: [] };
+            showPostDetail(postId) {
+                const post = this.posts.find(p => p.id === postId);
+                if (!post) return;
+                
+                // Көру санын арттыру
+                post.views++;
+                this.saveData();
+                
+                const modalTitle = document.getElementById('postModalTitle');
+                const modalBody = document.getElementById('postModalBody');
+                const timeAgo = this.getTimeAgo(post.created_at);
+                
+                modalTitle.textContent = post.title || post.username + ' пості';
+                
+                modalBody.innerHTML = `
+                    <div class="mb-4">
+                        <div class="d-flex align-items-center mb-4">
+                            <img src="${post.avatar_url}" 
+                                 alt="${post.username}" 
+                                 class="rounded-circle me-3" 
+                                 width="60" 
+                                 height="60">
+                            <div>
+                                <h5 class="mb-0 fw-bold">${post.username}</h5>
+                                <small class="text-muted">
+                                    <i class="far fa-clock"></i> ${timeAgo}
+                                </small>
+                            </div>
+                        </div>
+                        
+                        ${post.title ? `<h4 class="mb-4">${post.title}</h4>` : ''}
+                        
+                        <div class="post-content mb-4">
+                            ${post.content.replace(/\n/g, '<br>')}
+                        </div>
+                        
+                        ${post.image_url ? `
+                        <div class="mb-4 text-center">
+                            <img src="${post.image_url}" alt="Post image" class="post-image">
+                        </div>
+                        ` : ''}
+                        
+                        <div class="d-flex justify-content-between align-items-center border-top border-bottom py-3 mb-4">
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-danger like-btn" data-post-id="${post.id}">
+                                    <i class="far fa-heart"></i>
+                                    <span class="like-count">${post.likes}</span>
+                                    <span data-translate="like">Лайк</span>
+                                </button>
+                                <button class="btn btn-outline-primary">
+                                    <i class="far fa-comment"></i>
+                                    <span>${post.comments}</span>
+                                    <span data-translate="comment">Пікір</span>
+                                </button>
+                                <button class="btn btn-outline-secondary">
+                                    <i class="fas fa-share"></i>
+                                    <span data-translate="share">Бөлісу</span>
+                                </button>
+                            </div>
+                            <small class="text-muted">
+                                <i class="far fa-eye"></i> ${post.views} <span data-translate="views">көрді</span>
+                            </small>
+                        </div>
+                        
+                        <div class="alert alert-success">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <strong>${this.currentLanguage === 'kk' ? 'КЕРЕМЕТ!' : 'ОТЛИЧНО!'}</strong>
+                            <span class="ms-2">
+                                ${this.currentLanguage === 'kk' 
+                                    ? 'Бұл пост nartai.netlify.app сайтындағы БАРЛЫҚ пайдаланушыларға көрінеді!' 
+                                    : 'Этот пост видят ВСЕ пользователи на сайте nartai.netlify.app!'}
+                            </span>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <h6><i class="fas fa-info-circle me-2"></i> Пост туралы ақпарат:</h6>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <small class="text-muted">
+                                        <i class="fas fa-user"></i> 
+                                        <span data-translate="post_by">Автор:</span> ${post.username}
+                                    </small>
+                                </div>
+                                <div class="col-md-6">
+                                    <small class="text-muted">
+                                        <i class="far fa-calendar"></i> 
+                                        <span data-translate="posted_on">Жарияланды:</span> ${post.created_at}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Модальды терезені көрсету
+                const postModal = new bootstrap.Modal(document.getElementById('postModal'));
+                postModal.show();
+                
+                // Лайк батырмасын байлау
+                const likeBtn = modalBody.querySelector('.like-btn');
+                if (likeBtn) {
+                    likeBtn.addEventListener('click', () => {
+                        this.likePost(postId);
+                    });
                 }
-                
-                const searchTerm = query.toLowerCase();
-                const foundPosts = this.posts.filter(post => 
-                    (post.title && post.title.toLowerCase().includes(searchTerm)) ||
-                    (post.content && post.content.toLowerCase().includes(searchTerm)) ||
-                    (post.username && post.username.toLowerCase().includes(searchTerm))
-                );
-                
-                const foundUsers = this.users.filter(user =>
-                    (user.username && user.username.toLowerCase().includes(searchTerm)) ||
-                    (user.full_name && user.full_name.toLowerCase().includes(searchTerm))
-                );
-                
-                return { posts: foundPosts, users: foundUsers };
             }
             
-            // Пост табу
-            findPost(postId) {
-                return this.posts.find(post => post.id == postId);
+            likePost(postId) {
+                const post = this.posts.find(p => p.id === postId);
+                if (!post || !this.currentUser) {
+                    this.showMessage(this.currentLanguage === 'kk' 
+                        ? 'Лайк қою үшін кіру керек' 
+                        : 'Для лайка требуется вход', 'error');
+                    return;
+                }
+                
+                post.likes++;
+                
+                // Пайдаланушы статистикасын жаңарту
+                const user = this.users.find(u => u.id === this.currentUser.id);
+                if (user) {
+                    user.likes_count = (user.likes_count || 0) + 1;
+                }
+                
+                this.saveData();
+                this.updateRealtimeStats();
+                
+                // Лайк санын жаңарту
+                document.querySelectorAll(`.like-btn[data-post-id="${postId}"] .like-count`).forEach(span => {
+                    span.textContent = post.likes;
+                    span.parentElement.classList.add('pulse');
+                    setTimeout(() => {
+                        span.parentElement.classList.remove('pulse');
+                    }, 300);
+                });
+                
+                // Лайк батырмасын белгілеу
+                document.querySelectorAll(`.like-btn[data-post-id="${postId}"]`).forEach(btn => {
+                    btn.classList.add('liked');
+                    btn.querySelector('i').classList.remove('far');
+                    btn.querySelector('i').classList.add('fas');
+                });
+                
+                this.showMessage(this.currentLanguage === 'kk' 
+                    ? 'Лайк қойылды!' 
+                    : 'Лайк поставлен!', 'success');
+            }
+            
+            markUserOnline(userId) {
+                const user = this.users.find(u => u.id === userId);
+                if (user) {
+                    user.is_online = true;
+                    user.last_seen = new Date().toISOString();
+                    this.onlineUsers.add(userId);
+                    this.saveData();
+                    this.updateRealtimeStats();
+                }
+            }
+            
+            updateRealtimeStats() {
+                // Онлайн пайдаланушылар
+                const onlineUsers = this.users.filter(u => u.is_online).length;
+                document.getElementById('liveUsersCount').textContent = onlineUsers;
+                
+                // Барлық посттар
+                const totalPosts = this.posts.filter(p => p.is_public).length;
+                document.getElementById('totalPostsCount').textContent = totalPosts;
+                
+                // Бүгінгі посттар
+                const today = new Date().toISOString().split('T')[0];
+                const todayPosts = this.posts.filter(p => 
+                    p.is_public && p.created_at.startsWith(today)
+                ).length;
+                document.getElementById('todayPostsCount').textContent = todayPosts;
+                
+                // Барлық лайктар
+                const totalLikes = this.posts.reduce((sum, post) => sum + (post.likes || 0), 0);
+                document.getElementById('totalLikesCount').textContent = totalLikes;
+            }
+            
+            updateLastUpdateTime() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('kk-KZ', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                document.getElementById('lastUpdateTime').textContent = 
+                    (this.currentLanguage === 'kk' ? 'Соңғы жаңарту: ' : 'Последнее обновление: ') + timeString;
+            }
+            
+            startRealtimeUpdates() {
+                // Әр 30 секунд сайын статистиканы жаңарту
+                setInterval(() => {
+                    this.updateRealtimeStats();
+                    this.updateLastUpdateTime();
+                    
+                    // Онлайн күйін тексеру
+                    if (this.currentUser) {
+                        this.markUserOnline(this.currentUser.id);
+                    }
+                }, 30000);
+                
+                // Әр 60 секунд сайын посттарды жаңарту
+                setInterval(() => {
+                    if (document.getElementById('home').style.display !== 'none' ||
+                        document.getElementById('posts').style.display !== 'none') {
+                        this.loadPosts();
+                    }
+                }, 60000);
             }
         }
 
         // Платформаны бастау
-        const socialPlatform = new SocialPlatform();
+        const nartai = new NartaiPlatform();
 
         // DOM жүктелгеннен кейін
         document.addEventListener('DOMContentLoaded', function() {
+            // Тіл ауыстыру
+            document.getElementById('languageSwitcher').addEventListener('click', function() {
+                nartai.switchLanguage();
+            });
+            
             // Беттер арасында навигация
             document.querySelectorAll('.page-link').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const pageId = this.getAttribute('href').substring(1);
-                    socialPlatform.showPage(pageId);
+                    nartai.showPage(pageId);
                 });
             });
             
@@ -1660,20 +1879,8 @@
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const pageId = this.getAttribute('href').substring(1);
-                    socialPlatform.showPage(pageId);
+                    nartai.showPage(pageId);
                 });
-            });
-            
-            // Пост линктері
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('post-link') || e.target.closest('.post-link')) {
-                    e.preventDefault();
-                    const link = e.target.classList.contains('post-link') ? e.target : e.target.closest('.post-link');
-                    const postId = link.getAttribute('data-post-id');
-                    
-                    // Пост детальды бетін көрсету
-                    showPostDetail(postId);
-                }
             });
             
             // Тіркелу формасы
@@ -1684,63 +1891,35 @@
                 const email = document.getElementById('regEmail').value.trim();
                 const password = document.getElementById('regPassword').value;
                 const confirmPassword = document.getElementById('regConfirmPassword').value;
-                const fullName = document.getElementById('regFullName').value.trim();
                 
-                // Валидация
-                let isValid = true;
-                
-                // Пайдаланушы аты
                 if (username.length < 3) {
-                    document.getElementById('regUsername').classList.add('is-invalid');
-                    document.getElementById('usernameError').textContent = 'Пайдаланушы аты кемінде 3 таңба болуы керек';
-                    isValid = false;
-                } else {
-                    document.getElementById('regUsername').classList.remove('is-invalid');
+                    nartai.showMessage(nartai.currentLanguage === 'kk' 
+                        ? 'Пайдаланушы аты кемінде 3 таңба болуы керек' 
+                        : 'Имя пользователя должно быть не менее 3 символов', 'error');
+                    return;
                 }
                 
-                // Email
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    document.getElementById('regEmail').classList.add('is-invalid');
-                    document.getElementById('emailError').textContent = 'Жарамды электрондық поштаны енгізіңіз';
-                    isValid = false;
-                } else {
-                    document.getElementById('regEmail').classList.remove('is-invalid');
-                }
-                
-                // Құпиясөз
                 if (password.length < 6) {
-                    document.getElementById('regPassword').classList.add('is-invalid');
-                    document.getElementById('passwordError').textContent = 'Құпиясөз кемінде 6 таңба болуы керек';
-                    isValid = false;
-                } else {
-                    document.getElementById('regPassword').classList.remove('is-invalid');
+                    nartai.showMessage(nartai.currentLanguage === 'kk' 
+                        ? 'Құпиясөз кемінде 6 таңба болуы керек' 
+                        : 'Пароль должен быть не менее 6 символов', 'error');
+                    return;
                 }
                 
-                // Құпиясөзді растау
                 if (password !== confirmPassword) {
-                    document.getElementById('regConfirmPassword').classList.add('is-invalid');
-                    document.getElementById('confirmPasswordError').textContent = 'Құпиясөздер сәйкес келмейді';
-                    isValid = false;
+                    nartai.showMessage(nartai.currentLanguage === 'kk' 
+                        ? 'Құпиясөздер сәйкес келмейді' 
+                        : 'Пароли не совпадают', 'error');
+                    return;
+                }
+                
+                const result = nartai.register(username, email, password);
+                if (result.success) {
+                    nartai.showMessage(result.message, 'success');
+                    nartai.showPage('login');
+                    this.reset();
                 } else {
-                    document.getElementById('regConfirmPassword').classList.remove('is-invalid');
-                }
-                
-                // Шарттар
-                if (!document.getElementById('terms').checked) {
-                    socialPlatform.showMessage('Пайдалану шарттарымен келісу керек', 'error');
-                    isValid = false;
-                }
-                
-                if (isValid) {
-                    const result = socialPlatform.register(username, email, password, fullName);
-                    if (result.success) {
-                        socialPlatform.showMessage(result.message, 'success');
-                        socialPlatform.showPage('login');
-                        document.getElementById('registerForm').reset();
-                    } else {
-                        socialPlatform.showMessage(result.message, 'error');
-                    }
+                    nartai.showMessage(result.message, 'error');
                 }
             });
             
@@ -1751,99 +1930,102 @@
                 const email = document.getElementById('loginEmail').value;
                 const password = document.getElementById('loginPassword').value;
                 
-                const result = socialPlatform.login(email, password);
+                const result = nartai.login(email, password);
                 if (result.success) {
-                    socialPlatform.showMessage(result.message, 'success');
-                    socialPlatform.showPage('dashboard');
-                    document.getElementById('loginForm').reset();
+                    nartai.showMessage(result.message, 'success');
+                    nartai.showPage('home');
+                    this.reset();
                 } else {
-                    socialPlatform.showMessage(result.message, 'error');
+                    nartai.showMessage(result.message, 'error');
                 }
             });
             
             // Шығу
             document.getElementById('logoutBtn').addEventListener('click', function(e) {
                 e.preventDefault();
-                socialPlatform.logout();
+                nartai.logout();
             });
             
-            // Жаңа пост формасы
+            // Негізгі пост формасы
             document.getElementById('createPostForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                if (!socialPlatform.currentUser) {
-                    socialPlatform.showMessage('Пост жариялау үшін кіру керек', 'error');
-                    socialPlatform.showPage('login');
+                if (!nartai.currentUser) {
+                    nartai.showMessage(nartai.currentLanguage === 'kk' 
+                        ? 'Пост жариялау үшін кіру керек' 
+                        : 'Для публикации поста требуется вход', 'error');
+                    nartai.showPage('login');
                     return;
                 }
                 
                 const title = document.getElementById('postTitle').value.trim();
                 const content = document.getElementById('postContent').value.trim();
-                const category = document.getElementById('postCategory').value;
-                
-                // Валидация
-                let isValid = true;
+                const imageFile = document.getElementById('postImage').files[0];
                 
                 if (content.length === 0) {
-                    document.getElementById('postContent').classList.add('is-invalid');
-                    document.getElementById('contentError').textContent = 'Мазмұнды енгізу керек';
-                    isValid = false;
-                } else {
-                    document.getElementById('postContent').classList.remove('is-invalid');
+                    nartai.showMessage(nartai.currentLanguage === 'kk' 
+                        ? 'Мазмұнды енгізу керек' 
+                        : 'Требуется ввести содержание', 'error');
+                    return;
                 }
                 
-                if (isValid) {
-                    const result = socialPlatform.addPost(title, content, category);
+                let imageUrl = '';
+                if (imageFile) {
+                    // Нақты жобада суретті серверге жіберу керек
+                    // Бұл жерде мысал ретінде
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imageUrl = e.target.result;
+                        completePostCreation(title, content, imageUrl);
+                    };
+                    reader.readAsDataURL(imageFile);
+                } else {
+                    completePostCreation(title, content, '');
+                }
+                
+                function completePostCreation(title, content, imageUrl) {
+                    const result = nartai.addPost(title, content, imageUrl);
                     if (result.success) {
-                        socialPlatform.showMessage(result.message, 'success');
-                        socialPlatform.showPage('dashboard');
+                        nartai.showMessage(result.message, 'success');
+                        nartai.showPage('home');
                         document.getElementById('createPostForm').reset();
-                        document.getElementById('charCount').textContent = '0 таңба';
+                        document.getElementById('charCount').textContent = '0';
                         document.getElementById('imagePreview').style.display = 'none';
-                        
-                        // Посттарды жаңарту
-                        socialPlatform.loadPosts();
-                        socialPlatform.updateDashboard();
                     } else {
-                        socialPlatform.showMessage(result.message, 'error');
+                        nartai.showMessage(result.message, 'error');
                     }
                 }
             });
             
-            // Профильді өңдеу формасы
-            document.getElementById('editProfileForm').addEventListener('submit', function(e) {
+            // Жылдам пост формасы
+            document.getElementById('quickPostForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                if (!socialPlatform.currentUser) return;
+                if (!nartai.currentUser) {
+                    nartai.showMessage(nartai.currentLanguage === 'kk' 
+                        ? 'Пост жариялау үшін кіру керек' 
+                        : 'Для публикации поста требуется вход', 'error');
+                    nartai.showPage('login');
+                    return;
+                }
                 
-                const fullName = document.getElementById('editFullName').value.trim();
-                const bio = document.getElementById('editBio').value.trim();
-                const avatarFile = document.getElementById('editAvatar').files[0];
+                const content = document.getElementById('quickPostContent').value.trim();
                 
-                const userIndex = socialPlatform.users.findIndex(u => u.id === socialPlatform.currentUser.id);
-                if (userIndex !== -1) {
-                    socialPlatform.users[userIndex].full_name = fullName;
-                    socialPlatform.users[userIndex].bio = bio;
-                    
-                    // Аватарды жаңарту
-                    if (avatarFile) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            socialPlatform.users[userIndex].avatar_url = e.target.result;
-                            socialPlatform.saveData();
-                            socialPlatform.updateProfile();
-                            socialPlatform.updateDashboard();
-                            socialPlatform.showMessage('Профиль сәтті жаңартылды', 'success');
-                        };
-                        reader.readAsDataURL(avatarFile);
-                    } else {
-                        socialPlatform.saveData();
-                        socialPlatform.updateProfile();
-                        socialPlatform.updateDashboard();
-                        socialPlatform.showMessage('Профиль сәтті жаңартылды', 'success');
-                    }
-                    
-                    socialPlatform.showPage('profile');
+                if (content.length === 0) {
+                    nartai.showMessage(nartai.currentLanguage === 'kk' 
+                        ? 'Мазмұнды енгізу керек' 
+                        : 'Требуется ввести содержание', 'error');
+                    return;
+                }
+                
+                const result = nartai.addPost('', content, '');
+                if (result.success) {
+                    nartai.showMessage(result.message, 'success');
+                    this.reset();
+                    // Посттарды жаңарту
+                    nartai.loadPosts();
+                } else {
+                    nartai.showMessage(result.message, 'error');
                 }
             });
             
@@ -1852,27 +2034,10 @@
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    
                     reader.onload = function(e) {
                         document.getElementById('imagePreview').src = e.target.result;
                         document.getElementById('imagePreview').style.display = 'block';
                     };
-                    
-                    reader.readAsDataURL(file);
-                } else {
-                    document.getElementById('imagePreview').style.display = 'none';
-                }
-            });
-            
-            document.getElementById('editAvatar').addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    
-                    reader.onload = function(e) {
-                        document.getElementById('editAvatarPreview').src = e.target.result;
-                    };
-                    
                     reader.readAsDataURL(file);
                 }
             });
@@ -1880,303 +2045,107 @@
             // Мәтін санағыш
             document.getElementById('postContent').addEventListener('input', function() {
                 const count = this.value.length;
-                document.getElementById('charCount').textContent = `${count} таңба`;
+                document.getElementById('charCount').textContent = count;
+            });
+            
+            // Профиль өңдеу
+            document.getElementById('editProfileBtn').addEventListener('click', function() {
+                const editProfileModal = new bootstrap.Modal(document.getElementById('editProfileModal'));
+                editProfileModal.show();
+            });
+            
+            // Профиль өңдеу формасы
+            document.getElementById('editProfileForm').addEventListener('submit', function(e) {
+                e.preventDefault();
                 
-                if (count > 1000) {
-                    document.getElementById('charCount').style.color = '#dc3545';
-                } else if (count > 500) {
-                    document.getElementById('charCount').style.color = '#ffc107';
+                if (!nartai.currentUser) return;
+                
+                const fullName = document.getElementById('editFullName').value.trim();
+                const bio = document.getElementById('editBio').value.trim();
+                const avatarFile = document.getElementById('editAvatar').files[0];
+                
+                const user = nartai.users.find(u => u.id === nartai.currentUser.id);
+                if (user) {
+                    user.full_name = fullName || user.username;
+                    user.bio = bio;
+                    
+                    if (avatarFile) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            user.avatar_url = e.target.result;
+                            nartai.saveData();
+                            nartai.updateUI();
+                            nartai.showMessage(nartai.currentLanguage === 'kk' 
+                                ? 'Профиль жаңартылды' 
+                                : 'Профиль обновлен', 'success');
+                            
+                            const modal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
+                            modal.hide();
+                        };
+                        reader.readAsDataURL(avatarFile);
+                    } else {
+                        nartai.saveData();
+                        nartai.updateUI();
+                        nartai.showMessage(nartai.currentLanguage === 'kk' 
+                            ? 'Профиль жаңартылды' 
+                            : 'Профиль обновлен', 'success');
+                        
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
+                        modal.hide();
+                    }
+                }
+            });
+            
+            // Сурет өңдеу
+            document.getElementById('editAvatar').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('editAvatarPreview').src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Посттарды жаңарту
+            document.getElementById('refreshPosts').addEventListener('click', function() {
+                nartai.loadPosts();
+                nartai.updateRealtimeStats();
+                nartai.showMessage(nartai.currentLanguage === 'kk' 
+                    ? 'Посттар жаңартылды' 
+                    : 'Посты обновлены', 'success');
+            });
+            
+            // Іздеу
+            document.getElementById('searchPosts').addEventListener('input', function(e) {
+                const query = this.value.toLowerCase();
+                const allPosts = nartai.posts.filter(p => p.is_public);
+                
+                if (query) {
+                    const filteredPosts = allPosts.filter(post => 
+                        post.content.toLowerCase().includes(query) ||
+                        (post.title && post.title.toLowerCase().includes(query)) ||
+                        post.username.toLowerCase().includes(query)
+                    );
+                    
+                    document.getElementById('allPostsList').innerHTML = filteredPosts.map(post => 
+                        nartai.createPostHTML(post)
+                    ).join('');
+                    
+                    document.getElementById('allPostsCount').textContent = filteredPosts.length;
                 } else {
-                    document.getElementById('charCount').style.color = '#198754';
-                }
-            });
-            
-            // Іздеу формасы
-            document.getElementById('searchForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const query = document.getElementById('searchInput').value.trim();
-                if (query) {
-                    socialPlatform.showPage('search');
-                    performSearch(query);
-                }
-            });
-            
-            document.getElementById('searchPageForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const query = document.getElementById('searchPageInput').value.trim();
-                if (query) {
-                    performSearch(query);
-                }
-            });
-            
-            // Құпиясөзді өзгерту
-            document.getElementById('changePasswordBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                socialPlatform.showMessage('Бұл функция әлі іске асырылмаған', 'info');
-            });
-            
-            // Аккаунтты жою
-            document.getElementById('deleteAccountBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                if (confirm('Аккаунтыңызды жойғыңыз келетініне сенімдісіз бе? Бұл әрекетті қайтару мүмкін емес.')) {
-                    socialPlatform.showMessage('Аккаунт жойылды', 'success');
-                    socialPlatform.logout();
+                    document.getElementById('allPostsList').innerHTML = allPosts.map(post => 
+                        nartai.createPostHTML(post)
+                    ).join('');
+                    
+                    document.getElementById('allPostsCount').textContent = allPosts.length;
                 }
             });
             
             // Бастапқы бетті көрсету
-            socialPlatform.showPage('home');
+            nartai.showPage('home');
         });
-        
-        // Іздеуді орындау
-        function performSearch(query) {
-            const results = socialPlatform.search(query);
-            const searchResults = document.getElementById('searchResults');
-            
-            if (results.posts.length === 0 && results.users.length === 0) {
-                searchResults.innerHTML = `
-                    <div class="text-center py-5">
-                        <i class="fas fa-search fa-4x text-muted mb-3"></i>
-                        <h4>"${query}" бойынша ешнәрсе табылмады</h4>
-                        <p class="text-muted mb-4">Басқа сөздермен қайта іздеп көріңіз</p>
-                    </div>
-                `;
-            } else {
-                let html = `
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i> 
-                        ${results.posts.length} пост және ${results.users.length} пайдаланушы табылды
-                    </div>
-                `;
-                
-                if (results.users.length > 0) {
-                    html += `
-                        <div class="mb-5">
-                            <h5 class="mb-3">
-                                <i class="fas fa-users"></i> Пайдаланушылар
-                                <span class="badge bg-success">${results.users.length}</span>
-                            </h5>
-                            
-                            <div class="row">
-                                ${results.users.map(user => `
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card h-100">
-                                            <div class="card-body text-center">
-                                                <img src="${user.avatar_url}" 
-                                                     alt="${user.username}" 
-                                                     class="rounded-circle mb-3" 
-                                                     width="80" 
-                                                     height="80">
-                                                
-                                                <h6 class="card-title mb-1">
-                                                    ${user.username}
-                                                </h6>
-                                                
-                                                ${user.full_name ? `<p class="text-muted mb-2">${user.full_name}</p>` : ''}
-                                                
-                                                <button class="btn btn-sm btn-outline-primary view-profile-btn" data-user-id="${user.id}">
-                                                    Профильді көру
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
-                
-                if (results.posts.length > 0) {
-                    html += `
-                        <div>
-                            <h5 class="mb-3">
-                                <i class="fas fa-newspaper"></i> Посттар
-                                <span class="badge bg-primary">${results.posts.length}</span>
-                            </h5>
-                            
-                            <div class="list-group">
-                                ${results.posts.map(post => `
-                                    <a href="#post-${post.id}" class="list-group-item list-group-item-action post-link" data-post-id="${post.id}">
-                                        <div class="d-flex w-100 justify-content-between">
-                                            <h6 class="mb-1">${post.title || 'Тақырыпсыз'}</h6>
-                                            <small class="text-muted">
-                                                ${post.created_at.split(' ')[0]}
-                                            </small>
-                                        </div>
-                                        
-                                        <p class="mb-1">
-                                            ${post.content.length > 200 ? post.content.substring(0, 200) + '...' : post.content}
-                                        </p>
-                                        
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <small class="text-muted">
-                                                <i class="fas fa-user"></i> @${post.username}
-                                                ${post.category ? `<span class="badge bg-secondary ms-2">${post.category}</span>` : ''}
-                                            </small>
-                                            
-                                            <small class="text-muted">
-                                                <i class="far fa-heart"></i> ${post.likes || 0}
-                                                <i class="far fa-comment ms-2"></i> ${post.comments || 0}
-                                            </small>
-                                        </div>
-                                    </a>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
-                
-                searchResults.innerHTML = html;
-                
-                // Профильді көру батырмалары
-                document.querySelectorAll('.view-profile-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const userId = this.getAttribute('data-user-id');
-                        const user = socialPlatform.users.find(u => u.id == userId);
-                        if (user) {
-                            // Профиль бетіне өту
-                            socialPlatform.showPage('profile');
-                            // Бұл пайдаланушының профилін көрсету (жеңілдетілген)
-                            alert(`${user.username} профилі. Бұл функция толық нұсқада қол жетімді болады.`);
-                        }
-                    });
-                });
-            }
-        }
-        
-        // Пост детальды бетін көрсету
-        function showPostDetail(postId) {
-            const post = socialPlatform.findPost(postId);
-            if (!post) return;
-            
-            const postDetailHTML = `
-                <div class="row">
-                    <div class="col-md-8 offset-md-2">
-                        <div class="card">
-                            <div class="card-body">
-                                <!-- Пост жоғарғы бөлігі -->
-                                <div class="d-flex align-items-center mb-4">
-                                    <img src="${post.avatar_url}" 
-                                         alt="${post.username}" 
-                                         class="rounded-circle me-3" 
-                                         width="60" 
-                                         height="60">
-                                    <div>
-                                        <h5 class="mb-0">${post.username}</h5>
-                                        <small class="text-muted">
-                                            <i class="far fa-clock"></i> ${socialPlatform.getTimeAgo(post.created_at)}
-                                            ${post.category ? `<span class="badge bg-secondary ms-2">${post.category}</span>` : ''}
-                                        </small>
-                                    </div>
-                                </div>
-                                
-                                <!-- Пост мазмұны -->
-                                <h2 class="card-title mb-4">${post.title || 'Тақырыпсыз'}</h2>
-                                
-                                <div class="post-content mb-4">
-                                    ${post.content.replace(/\n/g, '<br>')}
-                                </div>
-                                
-                                ${post.image_url ? `
-                                <div class="mb-4 text-center">
-                                    <img src="${post.image_url}" alt="Post image" class="img-fluid rounded" style="max-height: 500px;">
-                                </div>
-                                ` : ''}
-                                
-                                <!-- Лайк және пікір статистикасы -->
-                                <div class="d-flex justify-content-between align-items-center border-top border-bottom py-3 mb-4">
-                                    <div>
-                                        <button class="btn btn-outline-danger">
-                                            <i class="far fa-heart"></i>
-                                            <span>${post.likes || 0}</span> Лайк
-                                        </button>
-                                        
-                                        <button class="btn btn-outline-primary ms-2">
-                                            <i class="far fa-comment"></i> 
-                                            <span>${post.comments || 0}</span> Пікір
-                                        </button>
-                                    </div>
-                                </div>
-                                
-                                <!-- Пікір қосу -->
-                                ${socialPlatform.currentUser ? `
-                                <div class="mb-5">
-                                    <form id="commentForm-${post.id}">
-                                        <div class="d-flex align-items-start mb-3">
-                                            <img src="${socialPlatform.users.find(u => u.id === socialPlatform.currentUser.id)?.avatar_url || 'https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff'}" 
-                                                 alt="${socialPlatform.currentUser.username}" 
-                                                 class="rounded-circle me-3" 
-                                                 width="48" 
-                                                 height="48">
-                                            <div class="flex-grow-1">
-                                                <textarea class="form-control" 
-                                                          id="commentContent-${post.id}" 
-                                                          name="content" 
-                                                          rows="3" 
-                                                          placeholder="Пікіріңізді жазыңыз..." 
-                                                          required></textarea>
-                                                <div class="mt-2 text-end">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        <i class="fas fa-paper-plane"></i> Пікір қосу
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                ` : `
-                                <div class="alert alert-info mb-5">
-                                    <i class="fas fa-info-circle"></i> Пікір қалдыру үшін 
-                                    <a href="#login" class="alert-link page-link">жүйеге кіріңіз</a> немесе 
-                                    <a href="#register" class="alert-link page-link">тіркеліңіз</a>.
-                                </div>
-                                `}
-                            </div>
-                        </div>
-                        
-                        <div class="text-center mt-4">
-                            <a href="#home" class="btn btn-outline-primary page-link">
-                                <i class="fas fa-arrow-left"></i> Басты бетке оралу
-                            </a>
-                            <a href="#posts" class="btn btn-outline-secondary page-link ms-2">
-                                <i class="fas fa-newspaper"></i> Барлық посттар
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Уақытша пост детальды бетін көрсету
-            const tempContainer = document.createElement('div');
-            tempContainer.innerHTML = postDetailHTML;
-            tempContainer.classList.add('page-content');
-            tempContainer.id = 'post-detail';
-            
-            // Қазіргі бетті жасыру
-            document.querySelectorAll('.page-content').forEach(page => {
-                page.style.display = 'none';
-            });
-            
-            // Негізгі мазмұнға қосу
-            document.querySelector('main').appendChild(tempContainer);
-            
-            // Пікір формасы
-            if (socialPlatform.currentUser) {
-                document.getElementById(`commentForm-${post.id}`).addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const content = document.getElementById(`commentContent-${post.id}`).value.trim();
-                    if (content) {
-                        socialPlatform.showMessage('Пікір қосылды!', 'success');
-                        document.getElementById(`commentContent-${post.id}`).value = '';
-                    }
-                });
-            }
-            
-            // Навигацияны жаңарту
-            document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-        }
     </script>
 </body>
 </html>
